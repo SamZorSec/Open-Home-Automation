@@ -7,5 +7,5 @@
 
 
 ### Documentation
-home-assistant.io
-mysensors.org
+- [home-assistant.io](https://home-assistant.io)
+- [mysensors.org](https://www.mysensors.org)
