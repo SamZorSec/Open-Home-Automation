@@ -3,7 +3,7 @@ A simple example to control the build-in led of the nodeMCU board (esp8266)
 
 ## Configuration (MQTT)
 configuration.yaml :
-```
+```yaml
 mqtt:
   broker: [Redacted]
   port: 1883
@@ -13,7 +13,7 @@ mqtt:
 
 ## Configuration (light)
 configuration.yaml :
-```
+```yaml
 light:
   platform: mqtt
   name: "Office light"
