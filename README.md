@@ -1,7 +1,14 @@
 # Open Home Automation with Home-Assistant
 
 ## MQTT
-- ha_mqtt_light : a simple example to control the build-in led of the nodeMCU board (esp8266)
+A MQTT broker is mandatory. More information can be found at the [MQTT component's page](https://home-assistant.io/components/mqtt/)
+configuration.yaml :
+```yaml
+mqtt:
+  broker: [Redacted]
+```
+- ha_mqtt_light : a simple example to control the built-in led of the nodeMCU board (esp8266)
+- ha_mqtt_rgb_light : a simple example to control a rgb led connected to a nodeMCU board (esp8266)
 
 ## MySensors
 - HumTempPres : Humidity, temperature and pressure node

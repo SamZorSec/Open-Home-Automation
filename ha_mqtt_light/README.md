@@ -1,15 +1,5 @@
 # ha_mqtt_light - Home-Assistant
-A simple example to control the build-in led of the nodeMCU board (esp8266)
-
-## Configuration (MQTT)
-configuration.yaml :
-```yaml
-mqtt:
-  broker: [Redacted]
-  port: 1883
-  client_id: home-assistant-1
-  keepalive: 60
-```
+A simple example to control the built-in led of the nodeMCU board (esp8266)
 
 ## Configuration (light)
 configuration.yaml :
