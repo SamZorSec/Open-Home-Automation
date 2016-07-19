@@ -1,7 +1,10 @@
 # ha_mqtt_rgb_light - Home-Assistant
 A simple example to control a rgb led connected to a nodeMCU board (esp8266)
 
-## Configuration (light)
+## Demo
+<iframe width="560" height="315" src="https://www.youtube.com/embed/7rMpCZ9I2BU" frameborder="0" allowfullscreen></iframe>
+
+## Configuration
 configuration.yaml :
 ```yaml
 light:

@@ -1,7 +1,7 @@
 # ha_mqtt_light - Home-Assistant
 A simple example to control the built-in led of the nodeMCU board (esp8266)
 
-## Configuration (light)
+## Configuration
 configuration.yaml :
 ```yaml
 light:
