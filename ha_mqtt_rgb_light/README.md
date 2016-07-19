@@ -2,7 +2,7 @@
 A simple example to control a rgb led connected to a nodeMCU board (esp8266)
 
 ## Demo
-<iframe width="560" height="315" src="https://www.youtube.com/embed/7rMpCZ9I2BU" frameborder="0" allowfullscreen></iframe>
+[![Home-Assistant + MQTT + RGB light](screenshot.png)](https://www.youtube.com/watch?v=7rMpCZ9I2BU "Home-Assistant + MQTT + RGB light")
 
 ## Configuration
 configuration.yaml :
