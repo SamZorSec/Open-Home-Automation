@@ -3,6 +3,7 @@
 ## MQTT
 A MQTT broker is mandatory. More information can be found at the [MQTT component's page](https://home-assistant.io/components/mqtt/)
 
+### Configuration
 configuration.yaml :
 ```yaml
 mqtt:
@@ -13,6 +14,7 @@ mqtt:
   password: '[Redacted]'
 ```
 
+### Examples
 - [ha_mqtt_light](/ha_mqtt_light) : a simple example to control the built-in led of the nodeMCU board (esp8266)
 - [ha_mqtt_rgb_light](/ha_mqtt_rgb_light) : a simple example to control a rgb led connected to a nodeMCU board (esp8266)
 - [ha_mqtt_switch](/ha_mqtt_switch) : a simple example to control a switch connected to a nodeMCU board (esp8266)
