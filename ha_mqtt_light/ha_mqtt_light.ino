@@ -12,7 +12,8 @@
     - File > Examples > PubSubClient > mqtt_esp8266
 
    Samuel M. - 07.2016
-   https://github.com/mertenats
+   If you like this example, please add a star! Thank you!
+   https://github.com/mertenats/open-home-automation
 */
 
 #include <ESP8266WiFi.h>
