@@ -13,9 +13,11 @@ mqtt:
   password: '[Redacted]'
 ```
 
-- [ha_mqtt_light](https://github.com/mertenats/open-home-automation/tree/master/ha_mqtt_light) : a simple example to control the built-in led of the nodeMCU board (esp8266)
-- [ha_mqtt_rgb_light](https://github.com/mertenats/open-home-automation/tree/master/ha_mqtt_rgb_light) : a simple example to control a rgb led connected to a nodeMCU board (esp8266)
-- [ha_mqtt_switch](https://github.com/mertenats/open-home-automation/tree/master/ha_mqtt_switch) : a simple example to control a switch connected to a nodeMCU board (esp8266)
+- [ha_mqtt_light](/ha_mqtt_light) : a simple example to control the built-in led of the nodeMCU board (esp8266)
+- [ha_mqtt_rgb_light](/ha_mqtt_rgb_light) : a simple example to control a rgb led connected to a nodeMCU board (esp8266)
+- [ha_mqtt_switch](/ha_mqtt_switch) : a simple example to control a switch connected to a nodeMCU board (esp8266)
+- [ha_mqtt_sensor_dht22](/ha_mqtt_sensor_dht22) : a simple example to get temperature and humidity every ten minutes from a DHT22 sensor connected to a nodeMCU board (esp8266)
+
 
 ## MySensors
 - HumTempPres : Humidity, temperature and pressure node
