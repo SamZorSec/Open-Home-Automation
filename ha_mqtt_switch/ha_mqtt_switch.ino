@@ -17,7 +17,8 @@
     - https://www.arduino.cc/en/uploads/Tutorial/button.png
 
    Samuel M. - 08.2016
-   https://github.com/mertenats
+   If you like this example, please add a star! Thank you!
+   https://github.com/mertenats/open-home-automation
 */
 
 #include <ESP8266WiFi.h>
