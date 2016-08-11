@@ -16,7 +16,8 @@
     - https://learn.adafruit.com/adafruit-arduino-lesson-3-rgb-leds/breadboard-layout
 
    Samuel M. - 07.2016
-   https://github.com/mertenats
+   If you like this example, please add a star! Thank you!
+   https://github.com/mertenats/open-home-automation
 */
 
 #include <ESP8266WiFi.h>
