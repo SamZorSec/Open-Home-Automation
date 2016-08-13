@@ -1,7 +1,6 @@
 # ha_mqtt_sensor_dht22 - Home-Assistant
 A simple example to get temperature and humidity every ten minutes from a DHT22 sensor connected to a nodeMCU board (esp8266)
 
-
 ## Configuration
 configuration.yaml :
 ```yaml
