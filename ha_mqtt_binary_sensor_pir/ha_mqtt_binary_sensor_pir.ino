@@ -22,7 +22,7 @@
    Schematic :
     - https://learn.adafruit.com/pir-passive-infrared-proximity-motion-sensor/using-a-pir
 
-    TODO :
+   TODO :
     - Use the interrupts instead of constinously polling the sensor
 
    Samuel M. - 08.2016
