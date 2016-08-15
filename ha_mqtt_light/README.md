@@ -13,5 +13,4 @@ light:
 ```
 
 ## Schematic
-[schematic]: https://github.com/mertenats/open-home-automation/blob/master/ha_mqtt_light/Schematic.png "Schematic"
-
+![Schematic](Schematic.png)
