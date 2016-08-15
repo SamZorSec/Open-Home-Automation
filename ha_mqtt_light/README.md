@@ -14,4 +14,5 @@ light:
 
 ## Schematic
 - GND - LED - Resistor 220 Ohms - D1/GPIO5
+
 ![Schematic](Schematic.png)
