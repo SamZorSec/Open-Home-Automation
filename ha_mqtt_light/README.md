@@ -1,7 +1,7 @@
 # MQTT Light - Home-Assistant
-A simple example to control a led connected to a NodeMCU board (ESP8266)
+A simple example to control a led connected to a NodeMCU board (ESP8266).
 
-## Configuration (HA)
+## Configuration
 configuration.yaml :
 ```yaml
 light:
@@ -13,5 +13,5 @@ light:
 ```
 
 ## Schematic
-[schematic]: Schematic.png "Schematic"
+[schematic]: https://github.com/mertenats/open-home-automation/blob/master/ha_mqtt_light/Schematic.png "Schematic"
 
