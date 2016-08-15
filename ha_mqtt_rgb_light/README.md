@@ -21,7 +21,7 @@ light:
 - LED leg 1 - Resistor 270 Ohms - D1/GPIO5
 - LED leg 2 (longuest leg) - GND
 - LED leg 3 - Resistor 270 Ohms - D2/GPIO4
-- LED leg 4 - Resistor 270 Ohms - D3/- GND - LED - Resistor 220 Ohms - D1/GPIO5
+- LED leg 4 - Resistor 270 Ohms - D3/GPIO0
 
 ![Schematic](Schematic.png)
 
