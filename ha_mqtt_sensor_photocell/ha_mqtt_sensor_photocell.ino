@@ -1,5 +1,5 @@
 /*
-   MQTT Sensor - Brightness (photocell) for for Home-Assistant - NodeMCU (ESP8266)
+   MQTT Sensor - Brightness (photocell) for Home-Assistant - NodeMCU (ESP8266)
    https://home-assistant.io/components/sensor.mqtt/
 
    Libraries :

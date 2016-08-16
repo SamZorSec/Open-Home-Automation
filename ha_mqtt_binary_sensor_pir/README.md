@@ -1,5 +1,5 @@
-# ha_mqtt_binary_sensor_pir - Home-Assistant
-A simple example to use a PIR motion sensor connected to a nodeMCU board (esp8266)
+# MQTT Binary Sensor - Motion - Home-Assistant
+A simple example to use a PIR motion sensor cnnected to a NodeMCU board (ESP8266).
 
 ## Configuration
 configuration.yaml :
@@ -10,3 +10,10 @@ binary_sensor:
   name: 'Motion'
   sensor_class: motion
 ```
+
+## Schematic
+- PIR leg 1 - VCC
+- PIR leg 2 - D1/GPIO5
+- PIR leg 3 - GND
+
+![Schematic](Schematic.png)
