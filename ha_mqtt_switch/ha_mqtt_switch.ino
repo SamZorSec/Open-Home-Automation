@@ -1,5 +1,5 @@
 /*
-   MQTT switch for Home-Assistant (esp8266)
+   MQTT Switch for Home-Assistant - NodeMCU (ESP8266)
    https://home-assistant.io/components/switch.mqtt/
 
    Libraries :
@@ -14,9 +14,20 @@
     - OneButton : http://www.mathertel.de/Arduino/OneButtonLibrary.aspx
 
    Schematic :
-    - https://www.arduino.cc/en/uploads/Tutorial/button.png
+    - https://github.com/mertenats/open-home-automation/blob/master/ha_mqtt_switch/Schematic.png
+    - Switch leg 1 - VCC
+    - Switch leg 2 - D1/GPIO5 - Resistor 10K Ohms - GND
 
-   Samuel M. - 08.2016
+   Configuration (HA) :
+    switch:
+      platform: mqtt
+      name: 'Office Switch'
+      state_topic: 'office/switch1/status'
+      command_topic: 'office/switch1/set'
+      retain: true
+      optimistic: false
+
+   Samuel M. - v1.1 - 08.2016
    If you like this example, please add a star! Thank you!
    https://github.com/mertenats/open-home-automation
 */
@@ -27,18 +38,18 @@
 
 #define MQTT_VERSION MQTT_VERSION_3_1_1
 
-// WiFi ssid and password
-const PROGMEM char* WIFI_SSID = "[Redacted]";
-const PROGMEM char* WIFI_PASSWORD = "[Redacted]";
+// Wifi: SSID and password
+const char* WIFI_SSID = "[Redacted]";
+const char* WIFI_PASSWORD = "[Redacted]";
 
-// MQTT server IP and port, username and password
+// MQTT: ID, server IP, port, username and password
 const PROGMEM char* MQTT_CLIENT_ID = "office_switch1";
 const PROGMEM char* MQTT_SERVER_IP = "[Redacted]";
 const PROGMEM uint16_t MQTT_SERVER_PORT = 1883;
 const PROGMEM char* MQTT_USER = "[Redacted]";
 const PROGMEM char* MQTT_PASSWORD = "[Redacted]";
 
-// MQTT topics
+// MQTT: topics
 const PROGMEM char* MQTT_SWITCH_STATUS_TOPIC = "office/switch1/status";
 const PROGMEM char* MQTT_SWITCH_COMMAND_TOPIC = "office/switch1/set";
 
@@ -49,7 +60,8 @@ const PROGMEM char* SWITCH_OFF = "OFF";
 // store the state of the switch
 boolean m_switch_state = false;
 
-const PROGMEM uint8_t BUTTON_PIN = 4;
+// D1/GPIO5
+const PROGMEM uint8_t BUTTON_PIN = 5;
 
 WiFiClient wifiClient;
 PubSubClient client(wifiClient);
@@ -69,9 +81,9 @@ void click() {
 // function called to publish the state of the switch (on/off)
 void publishSwitchState() {
   if (m_switch_state) {
-    client.publish(MQTT_SWITCH_STATUS_TOPIC, SWITCH_ON);
+    client.publish(MQTT_SWITCH_STATUS_TOPIC, SWITCH_ON, true);
   } else {
-    client.publish(MQTT_SWITCH_STATUS_TOPIC, SWITCH_OFF);
+    client.publish(MQTT_SWITCH_STATUS_TOPIC, SWITCH_OFF, true);
   }
 }
 
@@ -102,10 +114,10 @@ void callback(char* p_topic, byte* p_payload, unsigned int p_length) {
 void reconnect() {
   // Loop until we're reconnected
   while (!client.connected()) {
-    Serial.print("Attempting MQTT connection...");
+    Serial.print("INFO: Attempting MQTT connection...");
     // Attempt to connect
     if (client.connect(MQTT_CLIENT_ID, MQTT_USER, MQTT_PASSWORD)) {
-      Serial.println("connected");
+      Serial.println("INFO: connected");
       
       // Once connected, publish an announcement...
       // publish the initial values
@@ -114,9 +126,9 @@ void reconnect() {
       // ... and resubscribe
       client.subscribe(MQTT_SWITCH_COMMAND_TOPIC);
     } else {
-      Serial.print("failed, rc=");
+      Serial.print("ERROR: failed, rc=");
       Serial.print(client.state());
-      Serial.println(" try again in 5 seconds");
+      Serial.println("DEBUG: try again in 5 seconds");
       // Wait 5 seconds before retrying
       delay(5000);
     }
@@ -133,7 +145,7 @@ void setup() {
   // init the WiFi connection
   Serial.println();
   Serial.println();
-  Serial.print("Connecting to ");
+  Serial.print("INFO: Connecting to ");
   Serial.println(WIFI_SSID);
   WiFi.begin(WIFI_SSID, WIFI_PASSWORD);
 
@@ -143,8 +155,8 @@ void setup() {
   }
 
   Serial.println("");
-  Serial.println("WiFi connected");
-  Serial.println("IP address: ");
+  Serial.println("INFO: WiFi connected");
+  Serial.println("INFO: IP address: ");
   Serial.println(WiFi.localIP());
 
   // init the MQTT connection

@@ -1,5 +1,5 @@
 /*
-   MQTT Sensor - Temperature and Humidity (DHT22) for Home-Assistant -  NodeMCU (ESP8266)
+   MQTT Sensor - Temperature and Humidity (DHT22) for Home-Assistant - NodeMCU (ESP8266)
    https://home-assistant.io/components/sensor.mqtt/
 
    Libraries :
