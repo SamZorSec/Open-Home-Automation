@@ -1,5 +1,5 @@
 /*
-   MQTT "brightness" sensor for Home-Assistant (esp8266)
+   MQTT Sensor - Brightness (photocell) for for Home-Assistant - NodeMCU (ESP8266)
    https://home-assistant.io/components/sensor.mqtt/
 
    Libraries :
@@ -14,11 +14,20 @@
     - File > Examples > ArduinoJson > JsonGeneratorExample
 
    Schematic :
-    - https://learn.adafruit.com/photocells/using-a-photocell
-    - A photocell connected to A0
-    - A cable between D0 and RST (wake-up purpose)
+    - https://github.com/mertenats/open-home-automation/blob/master/ha_mqtt_sensor_photocell/Schematic.png
+    - Photocell leg 1 - VCC
+    - Photocell leg 2 - A0 - Resistor 10K Ohms - GND
+    - D0/GPIO16 - RST (wake-up purpose)
 
-   Samuel M. - 08.2016
+   Configuration (HA) :
+    sensor 1:
+      platform: mqtt
+      state_topic: 'office/sensor1'
+      name: 'Brightness'
+      unit_of_measurement: '%'
+      value_template: '{{ value_json.brightness }}'
+
+   Samuel M. - v1.1 - 08.2016
    If you like this example, please add a star! Thank you!
    https://github.com/mertenats/open-home-automation
 */
@@ -29,24 +38,24 @@
 
 #define MQTT_VERSION MQTT_VERSION_3_1_1
 
-// WiFi ssid and password
+// Wifi: SSID and password
 const PROGMEM char* WIFI_SSID = "[Redacted]";
 const PROGMEM char* WIFI_PASSWORD = "[Redacted]";
 
-// MQTT server IP and port, username and password
-const PROGMEM char* MQTT_CLIENT_ID = "office_switch1";
+// MQTT: ID, server IP, port, username and password
+const PROGMEM char* MQTT_CLIENT_ID = "office_brightness";
 const PROGMEM char* MQTT_SERVER_IP = "[Redacted]";
 const PROGMEM uint16_t MQTT_SERVER_PORT = 1883;
 const PROGMEM char* MQTT_USER = "[Redacted]";
 const PROGMEM char* MQTT_PASSWORD = "[Redacted]";
 
-// MQTT topic
+// MQTT: topic
 const PROGMEM char* MQTT_SENSOR_TOPIC = "office/sensor1";
 
 // sleeping time
 const PROGMEM uint16_t SLEEPING_TIME_IN_SECONDS = 600; // 10 minutes x 60 seconds
 
-// Photocell : A0 : https://bennthomsen.files.wordpress.com/2015/12/nodemcu_pinout_700-2.png?w=584
+// Photocell: A0 
 const PROGMEM uint8_t PHOTOCELL_PIN = 0;
 
 WiFiClient wifiClient;
@@ -81,14 +90,14 @@ void callback(char* p_topic, byte* p_payload, unsigned int p_length) {
 void reconnect() {
   // Loop until we're reconnected
   while (!client.connected()) {
-    Serial.print("Attempting MQTT connection...");
+    Serial.print("INFO: Attempting MQTT connection...");
     // Attempt to connect
     if (client.connect(MQTT_CLIENT_ID, MQTT_USER, MQTT_PASSWORD)) {
-      Serial.println("connected");
+      Serial.println("INFO: connected");
     } else {
-      Serial.print("failed, rc=");
+      Serial.print("ERROR: failed, rc=");
       Serial.print(client.state());
-      Serial.println(" try again in 5 seconds");
+      Serial.println("DEBUG: try again in 5 seconds");
       // Wait 5 seconds before retrying
       delay(5000);
     }
@@ -102,7 +111,7 @@ void setup() {
   // init the WiFi connection
   Serial.println();
   Serial.println();
-  Serial.print("Connecting to ");
+  Serial.print("INFO: Connecting to ");
   Serial.println(WIFI_SSID);
   WiFi.begin(WIFI_SSID, WIFI_PASSWORD);
 
@@ -112,8 +121,8 @@ void setup() {
   }
 
   Serial.println("");
-  Serial.println("WiFi connected");
-  Serial.println("IP address: ");
+  Serial.println("INFO: WiFi connected");
+  Serial.println("INFO: IP address: ");
   Serial.println(WiFi.localIP());
 
   // init the MQTT connection
@@ -131,16 +140,16 @@ void loop() {
   uint16_t photocell = analogRead(PHOTOCELL_PIN);
 
   if (photocell < 0 || photocell > 1024) {
-    Serial.println("Failed to read from the photocell!");
+    Serial.println("ERROR: Failed to read from the photocell!");
     return;
   } else {
     publishData(photocell);
   }
 
-  Serial.println("Closing the MQTT connection");
+  Serial.println("INFO: Closing the MQTT connection");
   client.disconnect();
 
-  Serial.println("Closing the Wifi connection");
+  Serial.println("INFO: Closing the Wifi connection");
   WiFi.disconnect();
 
   ESP.deepSleep(SLEEPING_TIME_IN_SECONDS * 1000000, WAKE_RF_DEFAULT);

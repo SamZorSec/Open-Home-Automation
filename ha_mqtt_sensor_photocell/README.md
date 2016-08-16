@@ -1,5 +1,5 @@
-# ha_mqtt_sensor_photocell - Home-Assistant
-A simple example to get the brightness (0 - 100%) of the room every ten minutes from a photocell connected to a nodeMCU board (esp8266)
+# MQTT Sensor - Brightness - Home-Assistant
+A simple example to get the brightness (0 - 100%) of the room every ten minutes from a photocell connected to a NodeMCU board (ESP8266).
 
 ## Configuration
 configuration.yaml :
@@ -11,3 +11,10 @@ sensor 1:
   unit_of_measurement: '%'
   value_template: '{{ value_json.brightness }}'
 ```
+
+## Schematic
+- Photocell leg 1 - VCC
+- Photocell leg 2 - A0 - Resistor 10K Ohms - GND
+- D0/GPIO16 - RST (wake-up purpose)
+
+![Schematic](Schematic.png)
