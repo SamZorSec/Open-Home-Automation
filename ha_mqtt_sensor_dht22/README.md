@@ -1,4 +1,4 @@
-# MQTT Sensor - Temperature and Humidity (DHT22) - Home-Assistant
+# MQTT Sensor - Temperature and Humidity - Home-Assistant
 A simple example to get temperature and humidity every ten minutes from a DHT22 sensor connected to a NodeMCU board (ESP8266).
 
 ## Configuration
