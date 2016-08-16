@@ -1,9 +1,15 @@
 # Open Home Automation with Home-Assistant
+## Home-Assitant
+> Home Assistant is a home automation platform running on Python 3. The goal of Home Assistant is to be able to track and control all devices at home and offer a platform for automating control [[Home-Assistant](https://github.com/home-assistant/home-assistant)].
+
+![Home-Assitant](https://github.com/home-assistant/home-assistant/blob/dev/docs/screenshots.png)
 
 ## MQTT
-A MQTT broker is mandatory. More information can be found at the [MQTT component's page](https://home-assistant.io/components/mqtt/)
+> MQTT is a machine-to-machine (M2M)/"Internet of Things" connectivity protocol. It was designed as an extremely lightweight publish/subscribe messaging transport. It is useful for connections with remote locations where a small code footprint is required and/or network bandwidth is at a premium [[mqtt.org](http://mqtt.org)].
 
 ### Configuration
+To integrate MQTT into Home Assistant, a MQTT broker is mandatory. More information can be found at the [MQTT component's page](https://home-assistant.io/components/mqtt/).
+
 configuration.yaml :
 ```yaml
 mqtt:
@@ -15,18 +21,13 @@ mqtt:
 ```
 
 ### Examples
-- [ha_mqtt_light](/ha_mqtt_light) : a simple example to control the built-in led of the nodeMCU board (esp8266)
-- [ha_mqtt_rgb_light](/ha_mqtt_rgb_light) : a simple example to control a rgb led connected to a nodeMCU board (esp8266)
-- [ha_mqtt_switch](/ha_mqtt_switch) : a simple example to control a switch connected to a nodeMCU board (esp8266)
-- [ha_mqtt_sensor_dht22](/ha_mqtt_sensor_dht22) : a simple example to get temperature and humidity every ten minutes from a DHT22 sensor connected to a nodeMCU board (esp8266)
-- [ha_mqtt_sensor_photocell](/ha_mqtt_sensor_photocell) : a simple example to get the brightness (0 - 100%) of the room every ten minutes from a photocell connected to a nodeMCU board (esp8266)
-- [ha_mqtt_binary_sensor_pir](/ha_mqtt_binary_sensor_pir) : A simple example to use a PIR motion sensor connected to a nodeMCU board (esp8266)
+Lights, sensors, switches and more can be built on top of MQTT. This section contains a few examples based on MQTT and on a NodeMCU board (ESP8266).
 
-
-## MySensors
-- HumTempPres : Humidity, temperature and pressure node
-
-## Documentation
-- [home-assistant.io](https://home-assistant.io)
-- [mysensors.org](https://www.mysensors.org)
-- [mqtt.org](http://mqtt.org)
+| Title / link     								| Description        											| 
+|-----------------------------------------------|---------------------------------------------------------------|
+| [Light](/ha_mqtt_light)     					| A simple example to control a led     						|
+| [Light](/ha_mqtt_rgb_light) 					| A simple example to control a RGB led 				  	    |
+| [Switch](/ha_mqtt_switch)   					| A simple example to control a switch  					 	| 
+| [Sensor](/ha_mqtt_sensor_dht22) 				| A simple example to measure the temperature and the humidity  |
+| [Sensor](/ha_mqtt_sensor_photocell) 			| A simple example to measure the brightness 					|
+| [Binary Sensor](/ha_mqtt_binary_sensor_pir) 	| A simple example to detect motions 							|
