@@ -23,11 +23,11 @@ mqtt:
 ### Examples
 Lights, sensors, switches and more can be built on top of MQTT. This section contains a few examples based on MQTT and on a NodeMCU board (ESP8266).
 
-| Title / link     								| Description        											| 
-|-----------------------------------------------|---------------------------------------------------------------|
-| [Light](/ha_mqtt_light)     					| A simple example to control a led     						|
-| [Light](/ha_mqtt_rgb_light) 					| A simple example to control a RGB led 				  	    |
-| [Switch](/ha_mqtt_switch)   					| A simple example to control a switch  					 	| 
-| [Sensor](/ha_mqtt_sensor_dht22) 				| A simple example to measure the temperature and the humidity  |
-| [Sensor](/ha_mqtt_sensor_photocell) 			| A simple example to measure the brightness 					|
-| [Binary Sensor](/ha_mqtt_binary_sensor_pir) 	| A simple example to detect motions 							|
+| Title / link     							              	| Description        											                              | 
+|-----------------------------------------------|-----------------------------------------------------------------------|
+| [Light](/ha_mqtt_light)     				        	| A simple example to control a **led**     					                	|
+| [Light](/ha_mqtt_rgb_light) 				        	| A simple example to control a **RGB led** 				              	    |
+| [Switch](/ha_mqtt_switch)   				        	| A simple example to control a **switch**  					                 	| 
+| [Sensor](/ha_mqtt_sensor_dht22) 			      	| A simple example to measure the **temperature** and the **humidity**  |
+| [Sensor](/ha_mqtt_sensor_photocell) 		    	| A simple example to measure the **brightness** 				              	|
+| [Binary Sensor](/ha_mqtt_binary_sensor_pir) 	| A simple example to detect **motions**                   							|
