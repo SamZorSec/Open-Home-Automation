@@ -28,6 +28,7 @@ Steps:
 ### Home-Assistant
 Warning: 'F90D5F' corresponds to the chip ID of my ESP8266.
 Your chip ID is visible in the logs and corresponds to the name of the initial AP.
+
 configuration.yaml :
 ```yaml
 light:
