@@ -1,4 +1,4 @@
-# MQTT Light - Home-Assistant
+# MQTT Light with WiFiManager, mDNS and OTA - Home-Assistant
 A simple example to control the built-in led connected to a NodeMCU board (ESP8266).
 
 ## Advanced features

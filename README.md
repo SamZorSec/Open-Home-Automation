@@ -33,4 +33,6 @@ Lights, sensors, switches and more can be built on top of MQTT. This section con
 | [Binary Sensor](/ha_mqtt_binary_sensor_pir) 	| A simple example to detect **motions** (PIR motion sensor)|
 
 
+An advanced example, using WiFiManager, mDNS and OTA, is available [here](/ha_mqtt_light_with_WiFiManager_mDNS_and_OTA).
+
 *If you like the content of this repo, please add a star! Thank you!*
