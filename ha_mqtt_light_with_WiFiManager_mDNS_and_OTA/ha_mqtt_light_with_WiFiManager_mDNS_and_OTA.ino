@@ -82,7 +82,7 @@
   Create a service on your machine, which hosts the MQTT broker
   On Linux:
     - sudo apt-get install avahi-deamon (installed by default)
-    - sudo cat /etc/avahi/services/mqtt.service
+    - sudo nano /etc/avahi/services/mqtt.service
     - Copy/paste the following lines:
         <?xml version="1.0" standalone='no'?>
         <!DOCTYPE service-group SYSTEM "avahi-service.dtd">

@@ -2,15 +2,15 @@
 A simple example to control the built-in led connected to a NodeMCU board (ESP8266).
 
 ## Advanced features
-- WiFiManager:	To list the available Wifi AP and to connecte to one of them
-- mDNS:			To look for the IP address and the port of the local MQTT broker
-- OTA: 			To update the firmware over-the-air
+- WiFiManager: To list the available Wifi AP and to connect to one of them
+- mDNS:        To look for the IP address and the port of the local MQTT broker
+- OTA:         To update the firmware over-the-air
 
 ## Configuration
-### MQTT broker server (a RPi, for example)
+### MQTT broker server
 Steps:
 - sudo apt-get install avahi-deamon (installed by default)
-- sudo cat /etc/avahi/services/mqtt.service
+- sudo nano /etc/avahi/services/mqtt.service
 - Copy/paste the following lines:
 ```xml
 <?xml version="1.0" standalone='no'?>
@@ -35,3 +35,12 @@ light:
   command_topic: '9A6C95/light/switch'
   optimistic: false
 ```
+
+## Steps
+1. Select the Wifi AP provided by the ESP8266. A window is open,
+2. Select "Configure WiFi",
+3. Choose your Wifi AP in the list and enter your password
+4. Enter the MQTT username and password. Press "save".
+
+![Schematic](Schematic.jpg)
+
