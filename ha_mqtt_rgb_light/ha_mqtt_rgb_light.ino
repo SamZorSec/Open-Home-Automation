@@ -30,7 +30,7 @@
       rgb_state_topic: 'office/rgb1/rgb/status'
       rgb_command_topic: 'office/rgb1/rgb/set'
       brightness_scale: 100
-      optimistic: falsefalse
+      optimistic: false
 
    Samuel M. - v1.1 - 08.2016
    If you like this example, please add a star! Thank you!
