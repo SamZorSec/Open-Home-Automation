@@ -1,4 +1,4 @@
-# MQTT Light with brightness support - Home-Assistant
+# MQTT Light with brightness support - Home Assistant
 A simple example to control a led connected to a NodeMCU board (ESP8266).
 
 ## Configuration

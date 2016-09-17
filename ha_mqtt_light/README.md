@@ -1,4 +1,4 @@
-# MQTT Light - Home-Assistant
+# MQTT Light - Home Assistant
 A simple example to control a led connected to a NodeMCU board (ESP8266).
 
 ## Configuration

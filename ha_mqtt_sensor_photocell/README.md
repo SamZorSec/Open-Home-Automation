@@ -1,4 +1,4 @@
-# MQTT Sensor - Brightness - Home-Assistant
+# MQTT Sensor - Brightness - Home Assistant
 A simple example to get the brightness (0 - 100%) of the room every ten minutes from a photocell connected to a NodeMCU board (ESP8266).
 
 ## Configuration

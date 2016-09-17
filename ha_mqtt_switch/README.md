@@ -1,4 +1,4 @@
-# MQTT Switch - Home-Assistant
+# MQTT Switch - Home Assistant
 A simple example to control a switch onnected to a NodeMCU board (ESP8266).
 
 ## Configuration

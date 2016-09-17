@@ -1,5 +1,5 @@
-# Open Home Automation with Home-Assistant
-## Home-Assitant
+# Open Home Automation with Home Assistant
+## Home Assitant
 > Home Assistant is a home automation platform running on Python 3. The goal of Home Assistant is to be able to track and control all devices at home and offer a platform for automating control [[Home-Assistant](https://github.com/home-assistant/home-assistant)].
 
 ![Home-Assitant](https://github.com/home-assistant/home-assistant/blob/dev/docs/screenshots.png)
