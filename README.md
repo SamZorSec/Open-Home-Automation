@@ -7,7 +7,7 @@
 ## MQTT
 > MQTT is a machine-to-machine (M2M)/"Internet of Things" connectivity protocol. It was designed as an extremely lightweight publish/subscribe messaging transport. It is useful for connections with remote locations where a small code footprint is required and/or network bandwidth is at a premium [[mqtt.org](http://mqtt.org)].
 
-### Configuration
+## Configuration
 To integrate MQTT into Home Assistant, a MQTT broker is mandatory. More information can be found at the [MQTT component's page](https://home-assistant.io/components/mqtt/).
 
 configuration.yaml :
@@ -20,7 +20,7 @@ mqtt:
   password: '[Redacted]'
 ```
 
-### Examples
+## Examples
 Lights, sensors, switches and more can be built on top of MQTT. This section contains a few examples based on MQTT and on a NodeMCU board (ESP8266).
 
 | Title / link     							              	| Description        											                              | 
