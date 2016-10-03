@@ -1,0 +1,50 @@
+default_view:
+  view: yes
+  entities:
+    - group.weather
+    - group.occupancy
+    - group.entrance
+    - group.livingroom
+    - group.bedroom
+    - group.alarm_clock
+
+weather:
+  name: 'Weather'
+  entities:
+    - sensor.forecastio_temperature
+    - sensor.forecastio_humidity
+    - sensor.forecastio_pressure
+
+occupancy:
+  name: 'Occupancy'
+  entities:
+    - device_tracker.samuel_phone
+
+entrance:
+  name: 'Entrance'
+  entities:
+    - binary_sensor.motion
+    - light.lamp_1
+    - light.lamp_2
+
+livingroom:
+  name: 'Living room'
+  entities:
+    - binary_sensor.tv
+    - light.lamp_3
+    - light.lamp_4
+
+bedroom:
+  name: 'Bedroom'
+  entities:
+    - binary_sensor.occupancy
+    - light.lamp_5
+    - light.lamp_6
+
+alarm_clock:
+  name: 'Alarm Clock'
+  entities:
+    - sensor.alarm_clock_time
+    - input_slider.alarm_clock_hour
+    - input_slider.alarm_clock_minute
+    - input_boolean.alarm_clock_status

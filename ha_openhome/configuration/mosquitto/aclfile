@@ -1,0 +1,71 @@
+user ha
+topic write entrance/light1/switch
+topic write entrance/light2/switch
+
+topic write livingroom/light1/switch
+topic write livingroom/light1/brightness/set
+topic write livingroom/light1/color/set
+topic write livingroom/light2/switch
+
+topic write bedroom/light1/switch
+topic write bedroom/light1/brightness/set
+topic write bedroom/light1/color/set
+topic write bedroom/light2/switch
+
+topic read entrance/light1/status
+topic read entrance/light2/status
+topic read entrance/door/motion/status
+topic read owntracks/samuel/phone
+topic read owntracks/samuel/phone/event
+
+topic read livingroom/light1/status
+topic read livingroom/light1/brightness/status
+topic read livingroom/light1/color/status
+topic read livingroom/light2/status
+topic read livingroom/tv/status
+
+topic read bedroom/light1/status
+topic read bedroom/light1/brightness/status
+topic read bedroom/light1/color/status
+topic read bedroom/light2/status
+topic read bedroom/bed/occupancy/status
+
+
+user entrance
+topic write entrance/light1/status
+topic write entrance/light2/status
+topic write entrance/door/motion/status
+
+topic read entrance/light1/switch
+topic read entrance/light2/switch
+
+
+user livingroom
+topic write livingroom/light1/status
+topic write livingroom/light1/brightness/status
+topic write livingroom/light1/color/status
+topic write livingroom/light2/status
+topic write livingroom/tv/status
+
+topic read livingroom/light1/switch
+topic read livingroom/light1/brightness/set
+topic read livingroom/light1/color/set
+topic read livingroom/light2/switch
+
+
+user bedroom
+topic write bedroom/light1/status
+topic write bedroom/light1/brightness/status
+topic write bedroom/light1/color/status
+topic write bedroom/light2/status
+topic write bedroom/bed/occupancy/status
+
+topic read bedroom/light1/switch
+topic read bedroom/light1/brightness/set
+topic read bedroom/light1/color/set
+topic read bedroom/light2/switch
+
+
+user samuel
+topic write owntracks/samuel/phone
+topic write owntracks/samuel/phone/event

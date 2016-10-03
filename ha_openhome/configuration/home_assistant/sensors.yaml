@@ -1,0 +1,20 @@
+- platform: forecast
+  api_key: [Redacted]
+  monitored_conditions:
+    - precip_probability
+    - temperature
+    - wind_speed
+    - cloud_cover
+    - humidity
+    - pressure
+    - temperature_max
+    - precip_intensity_max
+
+-  platform: template
+   sensors:
+     alarm_clock_hour:
+       value_template: '{{ states("input_slider.alarm_clock_hour") | round(0) }}'
+     alarm_clock_minute:
+       value_template: '{{ states("input_slider.alarm_clock_minute") | round(0) }}'
+     alarm_clock_time:
+       value_template: '{{ states("sensor.alarm_clock_hour") }}:{% if states("sensor.alarm_clock_minute")|length == 1 %}0{% endif %}{{ states("sensor.alarm_clock_minute") }}'

@@ -1,0 +1,66 @@
+# lights
+light.lamp_1:
+  friendly_name: 'Exterior Lamp'
+light.lamp_2:
+  friendly_name: 'Interior Lamp'
+light.lamp_3:
+  friendly_name: 'Cosy Lamp'
+light.lamp_4:
+  friendly_name: 'Ceiling Lamp'
+light.lamp_5:
+  friendly_name: 'Bedside Lamp'
+light.lamp_6:
+  friendly_name: 'Principal Lamp'
+
+# binary sensors
+# icon: https://materialdesignicons.com
+binary_sensor.occupancy:
+  friendly_name: 'Bed Occupancy'
+  icon: mdi:hotel
+binary_sensor.tv:
+  friendly_name: 'Television'
+device_tracker.samuel_phone:
+  friendly_name: 'Samuel'
+
+sun.sun:
+  hidden: true
+
+# Forecast.io
+sensor.forecastio_cloud_coverage:
+  hidden: true
+sensor.forecastio_daily_high_temperature:
+  hidden: true
+sensor.forecastio_daily_max_precip_intensity:
+  hidden: true
+sensor.forecastio_humidity:
+  friendly_name: 'Humidity'
+  icon: mdi:weather-rainy
+sensor.forecastio_precip_probability:
+  hidden: true
+sensor.forecastio_pressure:
+  friendly_name: 'Pressure'
+  icon: mdi:nature
+sensor.forecastio_temperature:
+  friendly_name: 'Temperature'
+  icon: mdi:thermometer
+sensor.forecastio_wind_speed:
+  hidden: true
+
+# alarm clock
+input_slider.alarm_clock_hour:
+  friendly_name: 'Hour'
+  icon: mdi:timer
+input_slider.alarm_clock_minute:
+  friendly_name: 'Minute'
+  icon: mdi:timer
+input_boolean.alarm_clock_status:
+  friendly_name: 'Alarm Clock Status (Week only)'
+  icon: mdi:alarm-check
+sensor.alarm_clock_hour:
+  hidden: true
+sensor.alarm_clock_minute:
+  hidden: true
+sensor.alarm_clock_time:
+  friendly_name: 'Alarm Clock Setting'
+  icon: mdi:alarm
+

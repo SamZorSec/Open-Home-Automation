@@ -1,0 +1,44 @@
+# lamp 1
+- platform: mqtt
+  name: 'Lamp 1'
+  state_topic: 'entrance/light1/status'
+  command_topic: 'entrance/light1/switch'
+  optimistic: false
+# lamp 2
+- platform: mqtt
+  name: 'Lamp 2'
+  state_topic: 'entrance/light2/status'
+  command_topic: 'entrance/light2/switch'
+  optimistic: false
+# lamp 3 (RGB)
+- platform: mqtt
+  name: 'Lamp 3'
+  state_topic: 'livingroom/light1/status'
+  command_topic: 'livingroom/light1/switch'
+  brightness_state_topic: 'livingroom/light1/brightness/status'
+  brightness_command_topic: 'livingroom/light1/brightness/set'
+  rgb_state_topic: 'livingroom/light1/color/status'
+  rgb_command_topic: 'livingroom/light1/color/set'
+  optimistic: false
+# lamp 4
+- platform: mqtt
+  name: 'Lamp 4'
+  state_topic: 'livingroom/light2/status'
+  command_topic: 'livingroom/light2/switch'
+  optimistic: false
+# lamp 5 (RGB)
+- platform: mqtt
+  name: 'Lamp 5'
+  state_topic: 'bedroom/light1/status'
+  command_topic: 'bedroom/light1/switch'
+  brightness_state_topic: 'bedroom/light1/brightness/status'
+  brightness_command_topic: 'bedroom/light1/brightness/set'
+  rgb_state_topic: 'bedroom/light1/color/status'
+  rgb_command_topic: 'bedroom/light1/color/set'
+  optimistic: false
+# lamp 6
+- platform: mqtt
+  name: 'Lamp 6'
+  state_topic: 'bedroom/light2/status'
+  command_topic: 'bedroom/light2/switch'
+  optimistic: false

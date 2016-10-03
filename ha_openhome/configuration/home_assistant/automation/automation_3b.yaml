@@ -1,0 +1,161 @@
+alias: 'Switch off the lamp 5 progressively (3b)'
+trigger:
+  platform: state
+  entity_id: binary_sensor.occupancy
+  from: 'off'
+  to: 'on'
+condition:
+  condition: time
+  after: '20:00:00'
+  before: '07:00:00'
+action:
+  - service: light.turn_off
+  # minute 0 to 1
+  - service: light.turn_on
+    data:
+      entity_id: light.lamp_5
+      brightness: 255
+      rgb_color: [255, 255, 255]
+  - delay:
+      seconds: 5
+#      minutes: 1
+  # minute 1 to 2
+  - service: light.turn_on
+    data:
+      entity_id: light.lamp_5
+      brightness: 240
+      rgb_color: [255, 255, 255]
+  - delay:
+      seconds: 5
+#      minutes: 1
+  # minute 2 to 3
+  - service: light.turn_on
+    data:
+      entity_id: light.lamp_5
+      brightness: 225
+      rgb_color: [255, 255, 0]
+  - delay:
+      seconds: 5
+#      minutes: 1
+  # minute 3 to 4
+  - service: light.turn_on
+    data:
+      entity_id: light.lamp_5
+      brightness: 210
+      rgb_color: [255, 255, 51]
+  - delay:
+      seconds: 5
+#      minutes: 1
+  # minute 4 to 5
+  - service: light.turn_on
+    data:
+      entity_id: light.lamp_5
+      brightness: 195
+      rgb_color: [255, 255, 102]
+  - delay:
+      seconds: 5
+#      minutes: 1
+  # minute 5 to 6
+  - service: light.turn_on
+    data:
+      entity_id: light.lamp_5
+      brightness: 180
+      rgb_color: [255, 255, 153]
+  - delay:
+      seconds: 5
+#      minutes: 1
+  # minute 6 to 7
+  - service: light.turn_on
+    data:
+      entity_id: light.lamp_5
+      brightness: 165
+      rgb_color: [255, 255, 204]
+  - delay:
+      seconds: 5
+#      minutes: 1
+  # minute 7 to 8
+  - service: light.turn_on
+    data:
+      entity_id: light.lamp_5
+      brightness: 150
+      rgb_color: [255, 229, 204]
+  - delay:
+      seconds: 5
+#      minutes: 1
+  # minute 8 to 9
+  - service: light.turn_on
+    data:
+      entity_id: light.lamp_5
+      brightness: 135
+      rgb_color: [255, 204, 153]
+  - delay:
+      seconds: 5
+#      minutes: 1
+  # minute 9 to 10
+  - service: light.turn_on
+    data:
+      entity_id: light.lamp_5
+      brightness: 120
+      rgb_color: [255, 178, 102]
+  - delay:
+      seconds: 5
+#      minutes: 1
+  # minute 10 to 11
+  - service: light.turn_on
+    data:
+      entity_id: light.lamp_5
+      brightness: 105
+      rgb_color: [255, 153, 51]
+  - delay:
+      seconds: 5
+#      minutes: 1
+  # minute 11 to 12
+  - service: light.turn_on
+    data:
+      entity_id: light.lamp_5
+      brightness: 90
+      rgb_color: [255, 128, 0]
+  - delay:
+      seconds: 5
+#      minutes: 1
+  # minute 12 to 13
+  - service: light.turn_on
+    data:
+      entity_id: light.lamp_5
+      brightness: 75
+      rgb_color: [255, 102, 102]
+  - delay:
+      seconds: 5
+#      minutes: 1
+ # minute 13 to 14
+  - service: light.turn_on
+    data:
+      entity_id: light.lamp_5
+      brightness: 60
+      rgb_color: [255, 51, 51]
+  - delay:
+      seconds: 5
+#      minutes: 1
+  # minute 14 to 15
+  - service: light.turn_on
+    data:
+      entity_id: light.lamp_5
+      brightness: 45
+      rgb_color: [255, 0, 0] # red
+  - delay:
+#      minutes: 1
+      seconds: 5
+  - service: light.turn_off
+#    data:
+#      entity_id: light.lamp_5
+#      brightness: 255
+#      rgb_color: [255, 255,255]
+  # set the light 5 into its initial state (withe, brightness 100%)
+  - service: mqtt.publish
+    data:
+      topic: 'bedroom/light1/color/set'
+      payload: '255,255,255'
+  - service: mqtt.publish
+    data:
+      topic: 'bedroom/light1/brightness/set'
+      payload: '255'

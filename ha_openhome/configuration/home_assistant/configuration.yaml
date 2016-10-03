@@ -1,0 +1,70 @@
+homeassistant:
+  # Name of the location where Home Assistant is running
+  name: Home
+  # Location required to calculate the time the sun rises and sets
+  latitude: [REDACTED]
+  longitude: [REDACTED]
+  # Impacts weather/sunrise data
+  elevation: [REDACTED]
+  # metric for Metric, imperial for Imperial
+  unit_system: metric
+  # Pick yours from here: http://en.wikipedia.org/wiki/List_of_tz_database_time_zones
+  time_zone: Europe/Zurich  
+  customize: !include customize.yaml
+
+# Show links to resources in log and frontend
+# introduction:
+
+# Enables the frontend
+frontend:
+
+http:
+  api_password: '[REDACTED]'
+  ssl_certificate: '/etc/letsencrypt/live/[REDACTED]/fullchain.pem'
+  ssl_key: '/etc/letsencrypt/live/[REDACTED]/privkey.pem'
+
+# Checks for available updates
+updater:
+
+# Discover some devices automatically
+discovery:
+
+# Allows you to issue voice commands from the frontend in enabled browsers
+# conversation:
+
+# Enables support for tracking state changes over time.
+history:
+
+# View all events in a logbook
+logbook:
+
+# Track the sun
+sun:
+
+
+mqtt:
+  broker: 'localhost' #127.0.0.1
+  port: 8883 #1883
+  client_id: 'ha'
+  username: 'ha'
+  password: '[REDACTED]'
+  certificate: '/etc/mosquitto/certs/ca.crt'
+
+light: !include lights.yaml
+sensor: !include sensors.yaml
+binary_sensor: !include binary_sensors.yaml
+group: !include groups.yaml
+automation: !include automation.yaml
+input_slider: !include input_sliders.yaml
+
+input_boolean: 
+  alarm_clock_status:
+    initial: on
+
+notify:
+  platform: telegram
+  api_key: [REDACTED]
+  chat_id: [REDACTED]
+
+device_tracker:
+  platform: owntracks

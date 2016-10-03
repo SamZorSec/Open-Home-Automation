@@ -1,0 +1,18 @@
+alias: 'Switch off the lamp 4 when the TV is turned on (2a)'
+trigger:
+  platform: state
+  entity_id: binary_sensor.tv
+  from: 'off'  
+  to: 'on'
+condition:
+  condition: state
+  entity_id: sun.sun
+  state: 'below_horizon'
+action:
+  - service: light.turn_off
+    entity_id: light.lamp_4
+  - service: light.turn_on
+    data:
+      entity_id: light.lamp_3
+      brightness: 128
+      rgb_color: [0, 255, 0]

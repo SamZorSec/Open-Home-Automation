@@ -1,0 +1,16 @@
+alias: 'Switch on the lamp 5 when the person get out of its bed (3c)' 
+trigger:
+  platform: state
+  entity_id: binary_sensor.occupancy
+  from: 'on'
+  to: 'off'
+condition:
+  condition: time
+  after: '20:00:00'
+  before: '07:00:00'
+action:
+  service: light.turn_on
+  data:
+    entity_id: light.lamp_5
+    brightness: 64
+    rgb_color: [255, 255, 255]

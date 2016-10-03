@@ -1,0 +1,34 @@
+alias: Simulate presence (4a)'
+trigger:
+  - platform: state
+    entity_id: group.all_devices
+    from: 'home'
+    to: 'not_home'
+  - platform: event
+    event_type: event_simulate_presence
+condition:  
+  condition: and
+  conditions:
+    - condition: state
+      entity_id: 'sun.sun'
+      state: 'below_horizon'
+    - condition: time
+      before: '23:01:00'
+    - condition: state
+      entity_id: group.all_devices
+      state: 'not_home'
+action:
+  # https://home-assistant.io/cookbook/perform_actions_based_on_input_select/
+  # https://home-assistant.io/getting-started/scripts/
+  - service: light.turn_on
+    data_template:
+      entity_id: >
+        light.lamp_{{ (range(1, 6) | random) }}
+  # wait some seconds (will be in reality in minutes)
+  - delay: '00:00:{{ (range(2, 10) | random) }}'
+  # turn off all devices
+  - service: light.turn_off
+  # wait a little bit before turning on another lamp
+  - delay: '00:00:{{ (range(1, 5) | random) }}'  
+  # generate an event to call again this automation rule
+  - event: event_simulate_presence

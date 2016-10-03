@@ -1,0 +1,26 @@
+alias: 'Switch on the lamp 1, 2 & 4 on arrival of an inhabitantn (1c)'
+trigger:
+  platform: state
+  entity_id: device_tracker.samuel_phone
+  from: 'not_home'  
+  to: 'home'
+condition:
+  condition: and
+  conditions:
+    - condition: time
+      before: '22:30:00'
+    - condition: state
+      entity_id: sun.sun
+      state: 'below_horizon'
+action:
+  - service: light.turn_on
+    entity_id:
+      - light.lamp_1
+      - light.lamp_2
+      - light.lamp_4
+  - delay:
+      minutes: 3
+  - service: light.turn_off
+    entity_id:
+      - light.lamp_1
+      - light.lamp_2

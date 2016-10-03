@@ -1,0 +1,11 @@
+- platform: mqtt
+  name: 'Motion'
+  state_topic: 'entrance/door/motion/status'
+  sensor_class: motion
+- platform: mqtt
+  name: 'Occupancy'
+  state_topic: 'bedroom/bed/occupancy/status'
+  sensor_class: occupancy
+- platform: mqtt
+  name: 'TV'
+  state_topic: 'livingroom/tv/status'

@@ -1,0 +1,13 @@
+- !include automation/automation_1a.yaml
+- !include automation/automation_1b.yaml
+- !include automation/automation_1c.yaml
+- !include automation/automation_1d.yaml
+
+- !include automation/automation_2a.yaml
+- !include automation/automation_2b.yaml
+
+- !include automation/automation_3a.yaml
+- !include automation/automation_3b.yaml
+- !include automation/automation_3c.yaml
+
+- !include automation/automation_4a.yaml
