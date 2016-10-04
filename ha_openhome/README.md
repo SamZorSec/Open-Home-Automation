@@ -207,9 +207,90 @@ Source:
 ).
 
 ### Homebridge
-The installation of Homebridge is not mandatory. Homebridge runs on Node.js and this language needs to be installed. A good tutoriel is available [here](https://blog.wia.io/installing-node-js-on-a-raspberry-pi-3). The installation of Homebridge on a Raspberry Pi is well documented [here](https://github.com/nfarina/homebridge/wiki/Running-HomeBridge-on-a-Raspberry-Pi). To link Homebridge and Home Assistant, a plugin is required. The plugin and the installation instructions are available [here](https://github.com/home-assistant/homebridge-homeassistant).
+The installation of Homebridge is not mandatory. Homebridge runs on Node.js and this language needs to be installed.
+
+We start by verifying if `git`and `make`are already installed. It's normally the case on Raspbian Jessie.
+
+```
+sudo apt-get install git make
+```
+
+First, we have to install Node.js.
+
+```
+cd Downloads/wget https://nodejs.org/dist/latest-v4.x/node-v4.6.0-linux-armv6l.tar.gz tar -xvf node-v4.6.0-linux-armv6l.tar.gzcd node-v4.6.0-linux-armv6l/sudo cp -R * /usr/local/
+```
+And install Avahi and dependencies.
+
+```
+sudo apt-get install libavahi-compat-libdnssd-dev screen
+```
+
+Finally we install Homebridge and dependencies.
+
+```
+sudo npm install -g --unsafe-perm homebridge hap-nodejs node-gyp cd /usr/local/lib/node_modules/homebridge/sudo npm install --unsafe-perm bignumcd /usr/local/lib/node_modules/hap-nodejs/node_modules/mdns/ sudo node-gyp BUILDTYPE=Release rebuildsudo npm install -g --unsafe-perm homebridge
+```
+
+To link Homebridge and Home Assistant together, we have to install this plugin.
+
+```
+sudo npm install -g homebridge-homeassistant
+```
+
+For starting Homebridge on boot, we need to create a service for `systemd`. Someone has already created one and we can just download it.
+
+```
+cd ~/Downloadswget https://gist.githubusercontent.com/johannrichard/0ad0de1feb6adb9eb61a/raw/7defd3836f4fbe2b98ea5a97 49c4413d024e9623/homebridge
+wget https://gist.githubusercontent.com/johannrichard/0ad0de1feb6adb9eb61a/raw/7defd3836f4fbe2b98ea5a97 49c4413d024e9623/homebridge.servicesudo cp homebridge /etc/default/sudo cp homebridge.service /etc/systemd/system
+```
+
+Then we create a new system user, `homebridge`, to execute the service for Homebridge. We create also a folder `/var/homebridge` for the configuration file.
+
+```
+sudo adduser --system homebridgesudo mkdir /var/homebridgesudo chown homebridge /var/homebridge```
+
+We need to create a configuration file for Homebridge. This file will be located in `/var/homebridge`, with the content displayed below.
+
+```
+sudo nano /var/homebridge/config.json
+```
+
+config.json:
+
+```
+{  "bridge": {    "name": "Homebridge",
+    "username": "CC:22:3D:E3:CE:30",
+    "port": 51826,    "pin": "031-45-154"  },  "description": "homebridge-homeassistant",
+  "platforms": [    {      "platform": "HomeAssistant",
+      "name": "HomeAssistant",
+      "host": "https://[Redacted]",
+      "password": "[Redacted]",
+      "supported_types": ["fan", "garage_door", "input_boolean", "light", "lock", "media_player", "rollershutter", "scene", "switch"]
+    }  ]
+}
+```
+
+We need to reload `systemd`to make the daemon aware of the new configuration.
+
+```
+sudo systemctl daemon-reload
+sudo systemctl enable homebridge
+sudo systemctl start homebridge
+```
 
 At the end, the Homebridge bridge should be visible inside Apple's Home application.
+
+Configuration of Homebridge in the Apple Home application:
+
+![Configuration for the Home application](images/Home.png)
+
+Sources:
+
+- [Running HomeBridge on a Raspberry Pi](https://github.com/nfarina/homebridge/wiki/Running-HomeBridge-on-a-Raspberry-Pi)
+- [Installing Node.js on a Raspberry Pi 3](https://blog.wia.io/installing-node-js-on-a-raspberry-pi-3)
+- [Home Assistant for Homebridge](https://github.com/home-assistant/homebridge-homeassistant)
+
 ## Installation of the extra components for Home Assistant
 ### Telegram
 Configuration for Home Assistant:
@@ -267,7 +348,7 @@ Configuration for Home Assistant
 ```yaml
 light:    # lamp 1  - platform: mqtt    name: 'Lamp 1'    state_topic: 'entrance/light1/status'
     command_topic: 'entrance/light1/switch' optimistic: false    # lamp 2  - platform: mqtt    name: 'Lamp 2'    state_topic: 'entrance/light2/status'
-    command_topic: 'entrance/light2/switch' optimistic: false  binary_sensor:  platform: mqtt  name: 'Motion'  state_topic: 'entrance/door/motion/status'
+    command_topic: 'entrance/light2/switch' optimistic: falsebinary_sensor:  platform: mqtt  name: 'Motion'  state_topic: 'entrance/door/motion/status'
   sensor_class: motion
 ```
 ### Living room
@@ -277,14 +358,14 @@ Configuration for Home Assistant:
 
 ```yaml
 light:    # lamp 3 (RGB)  - platform: mqtt    name: 'Lamp 3'    state_topic: 'livingroom/light1/status'    command_topic: 'livingroom/light1/switch'
-    brightness_state_topic: 'livingroom/light1/brightness/status' 
+    brightness_state_topic: 'livingroom/light1/brightness/status'
     brightness_command_topic: 'livingroom/light1/brightness/set'
     rgb_state_topic: 'livingroom/light1/color/status'
     rgb_command_topic: 'livingroom/light1/color/set'    optimistic: false
-  
+
     # lamp 4  - platform: mqtt    name: 'Lamp 4'    state_topic: 'livingroom/light2/status'
     command_topic: 'livingroom/light2/switch'
-    optimistic: false 
+    optimistic: false
 binary_sensor:  platform: mqtt  name: 'TV'  state_topic: 'livingroom/tv/status'
 ```
 ### Bedroom
