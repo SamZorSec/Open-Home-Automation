@@ -109,12 +109,12 @@ Important files
 
 The entire configuration is available [here](configuration/home_assistant).
 
-Optional steps
+Optional steps:
 
 - Allow a remote access to Home Assistant and protect the GUI with HTTPS ([here](https://home-assistant.io/blog/2015/12/13/setup-encryption-using-lets-encrypt/)).
 - Use Tor to make remote access anonymous ([here](https://home-assistant.io/cookbook/tor_configuration/)).
 
-Sources
+Sources:
 
 - [Installation in Virtualenv](https://home-assistant.io/getting-started/installation-virtualenv/)
 - [Autostart Using Systemd](https://home-assistant.io/getting-started/autostart-systemd/)
@@ -197,7 +197,7 @@ Important files:
 
 The entire configuration is available [here](configuration/mosquitto).
 
-Optional step
+Optional step:
 
 - Protect MQTT over a secure TLS connection ([here](http://owntracks.org/booklet/guide/broker/)).
 
@@ -308,3 +308,12 @@ light:    # lamp 5 (RGB)  - platform: mqtt    name: 'Lamp 5'    state_topic:
 ### Presence simulation
 
 ## Demonstration
+Features:
+
+- Change the lightning when the TV is switched on or off
+- Simulate the sunrise when the alarm clock rings
+- Simulate the sunset when the person is going to bed
+- Simulate a presence when nobody is at home
+- Control the system with Apple Home applicatioin and Siri
+
+[![OpenHome with Home Assistant and MQTT](images/Youtube.png)](https://www.youtube.com/watch?v=Vh-vzFPCF2U "OpenHome with Home Assistant and MQTT")
