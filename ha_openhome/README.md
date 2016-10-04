@@ -229,7 +229,8 @@ sudo apt-get install libavahi-compat-libdnssd-dev screen
 Finally we install Homebridge and dependencies.
 
 ```
-sudo npm install -g --unsafe-perm homebridge hap-nodejs node-gyp cd /usr/local/lib/node_modules/homebridge/sudo npm install --unsafe-perm bignumcd /usr/local/lib/node_modules/hap-nodejs/node_modules/mdns/ sudo node-gyp BUILDTYPE=Release rebuildsudo npm install -g --unsafe-perm homebridge
+sudo npm install -g --unsafe-perm homebridge hap-nodejs node-gyp
+cd /usr/local/lib/node_modules/homebridge/sudo npm install --unsafe-perm bignumcd /usr/local/lib/node_modules/hap-nodejs/node_modules/mdns/ sudo node-gyp BUILDTYPE=Release rebuildsudo npm install -g --unsafe-perm homebridge
 ```
 
 To link Homebridge and Home Assistant together, we have to install this plugin.
