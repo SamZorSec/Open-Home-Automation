@@ -6,8 +6,8 @@
 2. [Automation](#automation)
 3. [Parts list](#parts-list)
 4. [Installation of the controller](#installation-of-the-controller)
-5. [Installation of the extra components for Home Assistant](#installation-of-the-extra-components-for-homeassistant)
-6. [Implementation of the actuators/sensors](#implementation-of-the-actuators/sensors)
+5. [Installation of the extra components for Home Assistant](#installation-of-the-extra-components-for-home-assistant)
+6. [Implementation of the actuators and sensors](#implementation-of-the-actuators-and-sensors)
 7. [Creation of the automation rules](#creation-of-the-automation-rules)
 8. [Demonstration](#demonstration)
 
@@ -218,7 +218,8 @@ password_file /etc/mosquitto/conf.d/pwfile
 acl_file /etc/mosquitto/conf.d/aclfile
 listener 8883 (optional)
 cafile /etc/mosquitto/certs/ca.crt (optional)
-certfile /etc/mosquitto/certs/raspberrypi.crt keyfile /etc/mosquitto/certs/raspberrypi.key (optional)
+certfile /etc/mosquitto/certs/raspberrypi.crt
+keyfile /etc/mosquitto/certs/raspberrypi.key (optional)
 ```
 
 To link Home Assistant with the Mosquitto broker, the `configuration.yaml`file needs the lines below.
@@ -262,7 +263,8 @@ First, we have to install Node.js.
 
 ```
 cd Downloads/
-wget https://nodejs.org/dist/latest-v4.x/node-v4.6.0-linux-armv6l.tar.gz tar -xvf node-v4.6.0-linux-armv6l.tar.gz
+wget https://nodejs.org/dist/latest-v4.x/node-v4.6.0-linux-armv6l.tar.gz
+tar -xvf node-v4.6.0-linux-armv6l.tar.gz
 cd node-v4.6.0-linux-armv6l/
 sudo cp -R * /usr/local/
 ```
@@ -278,7 +280,8 @@ Finally we install Homebridge and dependencies.
 sudo npm install -g --unsafe-perm homebridge hap-nodejs node-gyp
 cd /usr/local/lib/node_modules/homebridge/
 sudo npm install --unsafe-perm bignum
-cd /usr/local/lib/node_modules/hap-nodejs/node_modules/mdns/ sudo node-gyp BUILDTYPE=Release rebuild
+cd /usr/local/lib/node_modules/hap-nodejs/node_modules/mdns/
+sudo node-gyp BUILDTYPE=Release rebuild
 sudo npm install -g --unsafe-perm homebridge
 ```
 
@@ -406,7 +409,7 @@ Sources:
 - [Forecast.io](https://home-assistant.io/components/sensor.forecast/)
 - [Owntracks](https://home-assistant.io/components/device_tracker.owntracks/)
 
-## Implementation of the actuators/sensors
+## Implementation of the actuators and sensors
 The sketches are available [here](sketches). Before using them, we need to modify the Wi-Fi SSID/password, the MQTT username/password, the desired IP address ant the OTA password. The use of TLS is optional.
 
 ```C
@@ -612,3 +615,5 @@ Features:
 - Control the system with Apple Home application and Siri
 
 [![OpenHome with Home Assistant and MQTT](images/Youtube.png)](https://www.youtube.com/watch?v=Vh-vzFPCF2U "OpenHome with Home Assistant and MQTT")
+
+*If you like the content of this repo, please add a star! Thank you!*
