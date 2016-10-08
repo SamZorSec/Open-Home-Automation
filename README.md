@@ -36,4 +36,6 @@ Lights, sensors, switches and more can be built on top of MQTT. This section con
 
 An advanced example, using WiFiManager, mDNS and OTA, is available [here](/ha_mqtt_light_with_WiFiManager_mDNS_and_OTA).
 
+A school project based on Home Assistant, MQTT and NodeMCU modules is available [here](openhome) and the demo, [here](https://www.youtube.com/watch?v=Vh-vzFPCF2U).
+
 *If you like the content of this repo, please add a star! Thank you!*
