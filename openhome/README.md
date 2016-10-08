@@ -4,23 +4,66 @@
 ## Table of contents
 1. [Introduction](#introduction)
 2. [Automation](#automation)
-3. [Parts list](#partslist)
-4. [Installation of the controller](#installationofthecontroller)
-5. [Installation of the extra components for Home Assistant](#installationoftheextracomponentsforhomeassistant)
-6. [Implementation of the actuators/sensors](#implementationoftheactuators/sensors)
-7. [Creation of the automation rules](#creationoftheautomationrules)
+3. [Parts list](#parts-list)
+4. [Installation of the controller](#installation-of-the-controller)
+5. [Installation of the extra components for Home Assistant](#installation-of-the-extra-components-for-homeassistant)
+6. [Implementation of the actuators/sensors](#implementation-of-the-actuators/sensors)
+7. [Creation of the automation rules](#creation-of-the-automation-rules)
 8. [Demonstration](#demonstration)
 
-
 ## Introduction
+Home Automation with Open Hardware and Software (a.k.a. OpenHome) was a school project made in a few weeks by a [student](https://www.linkedin.com/in/mertenats) at College of Engineering and Architecture of Fribourg, Switzerland ([HEIA](https://www.heia-fr.ch)).
+
 ### Context
+The main goal of this project is to offer an Open Source alternative to commercialized solutions, like Samsung SmartThings or Philips Hue.
+
+In this project, [Home Assistant](https://home-assistant.io) is used as the controller and the [MQTT](http://mqtt.org) protocol is used for the communication between the controller and the actuators/sensors.
+
+The controller is installed on a Raspberry Pi 3 and the actuators/sensors are built on top of [NodeMCU](http://nodemcu.com/index_cn.html) boards (ESP8266).
+
 ### Architecture
 
+Network architecture:
+![Features](images/Architecture_Network.png)
+
+Note: For simplicity, a NodeMCU module is used to connect two lamps and a sensor. In reality, a module will be used for each lamp or sensor.
+
+Application architecture:
+![Features](images/Architecture_MQTT.png)
+
 ## Automation
+In this project, only the lightning is automated, based on the departure/arrival of the occupiers, the state of the television in the living room or the occupancy of the bed in the bedroom. The lightning is also used to simulate a presence when nobody's home.
+
+Automation rule overview:
+
+- Change the lightning when the TV is switched on or off
+- Simulate the sunrise when the alarm clock rings
+- Simulate the sunset when the person is going to bed
+- Simulate a presence when nobody is at home
+
+The rules are further explained in the chapter [Creation of the automation rules](#creation-of-the-automation-rules).
 
 ## Parts list
-### Hardware
-### Software
+Hardware:
+
+- 1 Wi-Fi router
+- 1 Raspberry Pi
+- 3 NodeMCU boards (or any module based on an ESP8266 chip)
+- 2 RGB LEDs
+- 4 White LEDs
+- 1 PIR sensor (HC-SR501)
+- 1 Load cell
+- 1 Signal amplifier (HX711)
+- 1 Photo-resistor
+- 1 iBeacon
+- 1 iOS device 
+
+Software:
+
+- Arduino IDE ([here](https://www.arduino.cc))
+- ESP8266 core for Arduino ([here](https://github.com/esp8266/Arduino))
+- MQTT library ([here](https://github.com/knolleary/pubsubclient))
+- HX711 library ([hre](https://github.com/bogde/HX711))
 
 ## Installation of the controller
 ### Home Assistant
@@ -218,7 +261,10 @@ sudo apt-get install git make
 First, we have to install Node.js.
 
 ```
-cd Downloads/wget https://nodejs.org/dist/latest-v4.x/node-v4.6.0-linux-armv6l.tar.gz tar -xvf node-v4.6.0-linux-armv6l.tar.gzcd node-v4.6.0-linux-armv6l/sudo cp -R * /usr/local/
+cd Downloads/
+wget https://nodejs.org/dist/latest-v4.x/node-v4.6.0-linux-armv6l.tar.gz tar -xvf node-v4.6.0-linux-armv6l.tar.gz
+cd node-v4.6.0-linux-armv6l/
+sudo cp -R * /usr/local/
 ```
 And install Avahi and dependencies.
 
@@ -230,7 +276,10 @@ Finally we install Homebridge and dependencies.
 
 ```
 sudo npm install -g --unsafe-perm homebridge hap-nodejs node-gyp
-cd /usr/local/lib/node_modules/homebridge/sudo npm install --unsafe-perm bignumcd /usr/local/lib/node_modules/hap-nodejs/node_modules/mdns/ sudo node-gyp BUILDTYPE=Release rebuildsudo npm install -g --unsafe-perm homebridge
+cd /usr/local/lib/node_modules/homebridge/
+sudo npm install --unsafe-perm bignum
+cd /usr/local/lib/node_modules/hap-nodejs/node_modules/mdns/ sudo node-gyp BUILDTYPE=Release rebuild
+sudo npm install -g --unsafe-perm homebridge
 ```
 
 To link Homebridge and Home Assistant together, we have to install this plugin.
@@ -242,14 +291,20 @@ sudo npm install -g homebridge-homeassistant
 For starting Homebridge on boot, we need to create a service for `systemd`. Someone has already created one and we can just download it.
 
 ```
-cd ~/Downloadswget https://gist.githubusercontent.com/johannrichard/0ad0de1feb6adb9eb61a/raw/7defd3836f4fbe2b98ea5a97 49c4413d024e9623/homebridge
-wget https://gist.githubusercontent.com/johannrichard/0ad0de1feb6adb9eb61a/raw/7defd3836f4fbe2b98ea5a97 49c4413d024e9623/homebridge.servicesudo cp homebridge /etc/default/sudo cp homebridge.service /etc/systemd/system
+cd ~/Downloads
+wget https://gist.githubusercontent.com/johannrichard/0ad0de1feb6adb9eb61a/raw/7defd3836f4fbe2b98ea5a97 49c4413d024e9623/homebridge
+wget https://gist.githubusercontent.com/johannrichard/0ad0de1feb6adb9eb61a/raw/7defd3836f4fbe2b98ea5a97 49c4413d024e9623/homebridge.service
+sudo cp homebridge /etc/default/
+sudo cp homebridge.service /etc/systemd/system
 ```
 
 Then we create a new system user, `homebridge`, to execute the service for Homebridge. We create also a folder `/var/homebridge` for the configuration file.
 
 ```
-sudo adduser --system homebridgesudo mkdir /var/homebridgesudo chown homebridge /var/homebridge```
+sudo adduser --system homebridge
+sudo mkdir /var/homebridge
+sudo chown homebridge /var/homebridge
+```
 
 We need to create a configuration file for Homebridge. This file will be located in `/var/homebridge`, with the content displayed below.
 
@@ -260,15 +315,23 @@ sudo nano /var/homebridge/config.json
 config.json:
 
 ```
-{  "bridge": {    "name": "Homebridge",
+{
+  "bridge": {
+    "name": "Homebridge",
     "username": "CC:22:3D:E3:CE:30",
-    "port": 51826,    "pin": "031-45-154"  },  "description": "homebridge-homeassistant",
-  "platforms": [    {      "platform": "HomeAssistant",
+    "port": 51826,
+    "pin": "031-45-154"
+  },
+  "description": "homebridge-homeassistant",
+  "platforms": [
+    {
+      "platform": "HomeAssistant",
       "name": "HomeAssistant",
       "host": "https://[Redacted]",
       "password": "[Redacted]",
       "supported_types": ["fan", "garage_door", "input_boolean", "light", "lock", "media_player", "rollershutter", "scene", "switch"]
-    }  ]
+    }
+  ]
 }
 ```
 
@@ -293,22 +356,37 @@ Sources:
 - [Home Assistant for Homebridge](https://github.com/home-assistant/homebridge-homeassistant)
 
 ## Installation of the extra components for Home Assistant
+Some extra components have to be installed for providing notifications (with Telegram) with weather conditions (with Forecast.io) to the user and for detecting when the user when is entering/leaving the house (with Owntracks and an iBeacon).
+
 ### Telegram
+To use Telegram we need to create a bot. The procedure is discribed [here](https://core.telegram.org/bots).
+
 Configuration for Home Assistant:
 
 ```yaml
-notify:platform: telegramapi_key: [Redacted]
-chat_id: [Redacted]
+notify:
+  platform: telegram
+  api_key: [Redacted]
+  chat_id: [Redacted]
 ```
 ### Forcast.io
+To use the data from Forecast.io a [account](http://forecast.io) is necessary to retrieve a `api_key`. 
+
 Configuration for Home Assistant:
+
 ```yaml
-sensor:  platform: forecast  api_key: [Redacted]
-  monitored_conditions:    - precip_probability
-    - temperature    - wind_speed
+sensor:
+  platform: forecast
+  api_key: [Redacted]
+  monitored_conditions:
+    - precip_probability
+    - temperature
+    - wind_speed
     - cloud_cover
-    - humidity    - pressure
-    - temperature_max    - precip_intensity_max
+    - humidity
+    - pressure
+    - temperature_max
+    - precip_intensity_max
 ```
 ### Owntracks
 Configuration for Home Assistant:
@@ -319,6 +397,15 @@ device_tracker:
 ```
 Configuration for the Owntracks application:
 ![Configuration for the Owntracks application](images/Owntracks.png)
+
+Note: The MQTT broker must be accessible from outiside the local network and provide a SSL/TLS secure connexion.
+
+Sources:
+
+- [Telegram](https://home-assistant.io/components/notify.telegram/)
+- [Forecast.io](https://home-assistant.io/components/sensor.forecast/)
+- [Owntracks](https://home-assistant.io/components/device_tracker.owntracks/)
+
 ## Implementation of the actuators/sensors
 The sketches are available [here](sketches). Before using them, we need to modify the Wi-Fi SSID/password, the MQTT username/password, the desired IP address ant the OTA password. The use of TLS is optional.
 
@@ -342,52 +429,178 @@ const char*       OTA_PASSWORD      = "[Redacted]";
 ```
 
 ### Entrance
-Schematic:
+#### Schematic
+
+LED on the left:
+
+- Shortest leg to GND
+- Longuest leg to D1, with a 220 Ohms resistor
+ 
+LED on the right:
+
+- Shortest leg to GND
+- Longuest leg to D2, with a 220 Ohms resistor
+
+PIR sensor:
+
+- Red cable to VIN
+- Yellow cable to D3
+- Black cable to GND
+   
 ![Schematic of the entrance module](sketches/Entrance/Schematic.png)
-Configuration for Home Assistant
+#### Configuration for Home Assistant
 
 ```yaml
-light:    # lamp 1  - platform: mqtt    name: 'Lamp 1'    state_topic: 'entrance/light1/status'
-    command_topic: 'entrance/light1/switch' optimistic: false    # lamp 2  - platform: mqtt    name: 'Lamp 2'    state_topic: 'entrance/light2/status'
-    command_topic: 'entrance/light2/switch' optimistic: falsebinary_sensor:  platform: mqtt  name: 'Motion'  state_topic: 'entrance/door/motion/status'
+light:
+    # lamp 1
+  - platform: mqtt
+    name: 'Lamp 1'
+    state_topic: 'entrance/light1/status'
+    command_topic: 'entrance/light1/switch' optimistic: false
+    # lamp 2
+  - platform: mqtt
+    name: 'Lamp 2'
+    state_topic: 'entrance/light2/status'
+    command_topic: 'entrance/light2/switch' optimistic: false
+
+binary_sensor:
+  platform: mqtt
+  name: 'Motion'
+  state_topic: 'entrance/door/motion/status'
   sensor_class: motion
 ```
 ### Living room
-Schematic:
+#### Schematic
+LED on the left:
+
+- Longest leg to GND
+- Leg on the left to D1, with a 220 Ohms resistor
+- Leg on the middle to D2, with a 220 Ohms resistor
+- Leg on the right to D3, with a 220 Ohms resistor
+
+LED on the right:
+
+- Shortest leg to GND
+- Longest leg to D4, with a 220 Ohms resistor
+
+Photo-resistor:
+
+- One leg to VCC
+- The other leg to GND, with a 10K Ohms resistor and a cable to A0
+
 ![Schematic of the living room module](sketches/Livingroom/Schematic.png)
-Configuration for Home Assistant:
+
+#### Configuration for Home Assistant
 
 ```yaml
-light:    # lamp 3 (RGB)  - platform: mqtt    name: 'Lamp 3'    state_topic: 'livingroom/light1/status'    command_topic: 'livingroom/light1/switch'
+light:
+    # lamp 3 (RGB)
+  - platform: mqtt
+    name: 'Lamp 3'
+    state_topic: 'livingroom/light1/status'
+    command_topic: 'livingroom/light1/switch'
     brightness_state_topic: 'livingroom/light1/brightness/status'
     brightness_command_topic: 'livingroom/light1/brightness/set'
     rgb_state_topic: 'livingroom/light1/color/status'
-    rgb_command_topic: 'livingroom/light1/color/set'    optimistic: false
+    rgb_command_topic: 'livingroom/light1/color/set'
+    optimistic: false
 
-    # lamp 4  - platform: mqtt    name: 'Lamp 4'    state_topic: 'livingroom/light2/status'
+    # lamp 4
+  - platform: mqtt
+    name: 'Lamp 4'
+    state_topic: 'livingroom/light2/status'
     command_topic: 'livingroom/light2/switch'
     optimistic: false
-binary_sensor:  platform: mqtt  name: 'TV'  state_topic: 'livingroom/tv/status'
+binary_sensor:
+  platform: mqtt
+  name: 'TV'
+  state_topic: 'livingroom/tv/status'
 ```
 ### Bedroom
-Schematic:
+#### Schematic
+
+LED on the left:
+
+- Longest leg to GND
+- Leg on the left to D1, with a 220 Ohms resistor
+- Leg on the middle to D2, with a 220 Ohms resistor
+- Leg on the right to D3, with a 220 Ohms resistor
+
+LED on the right:
+
+- Shortest leg to GND
+- Longest leg to D4, with a 220 Ohms resistor
+
+Load cell to HX711:
+
+- Red cable to E+ 
+- Black cable to E- 
+- White cable to A- 
+- Green cable to A+ 
+
+HX711:
+
+- VCC to VCC
+- GND to GND
+- SCK to D6
+- DT to D5
+
 ![Schematic of the bedroom module](sketches/Bedroom/Schematic.png)
-Configuration for Home Assistant:
+#### Configuration for Home Assistant
 
 ```yaml
-light:    # lamp 5 (RGB)  - platform: mqtt    name: 'Lamp 5'    state_topic: 'bedroom/light1/status'    command_topic: 'bedroom/light1/switch'
+light:
+    # lamp 5 (RGB)
+  - platform: mqtt
+    name: 'Lamp 5'
+    state_topic: 'bedroom/light1/status'
+    command_topic: 'bedroom/light1/switch'
     brightness_state_topic: 'bedroom/light1/brightness/status'     
     brightness_command_topic: 'bedroom/light1/brightness/set'
     rgb_state_topic: 'bedroom/light1/color/status'
-    rgb_command_topic: 'bedroom/light1/color/set'    optimistic: false    # lamp 6  - platform: mqtt    name: 'Lamp 6'    state_topic: 'bedroom/light2/status'
+    rgb_command_topic: 'bedroom/light1/color/set'
+    optimistic: false
+    # lamp 6
+  - platform: mqtt
+    name: 'Lamp 6'
+    state_topic: 'bedroom/light2/status'
     command_topic: 'bedroom/light2/switch'
-    optimistic: falsebinary_sensor:  platform: mqtt  name: 'Occupancy'  state_topic: 'bedroom/bed/occupancy/status' sensor_class: occupancy
+    optimistic: false
+
+binary_sensor:
+  platform: mqtt
+  name: 'Occupancy'
+  state_topic: 'bedroom/bed/occupancy/status' sensor_class: occupancy
 ```
 ## Creation of the automation rules
 ### Entrance
+
+| Scenario | Description           | File  |
+| -------- |-------------| -----|
+| 1a       | Turn on the light 1 when a person is detected if nobody's home, the sun is below and the person is unknown | [here](configuration/home_assistant/automation/automation_1a.yaml) |
+| 1b       | Turn on the lights 1 & 2 when a person is detected if a occupier's at home, the sun is below and the person is unknown | [here](configuration/home_assistant/automation/automation_1b.yaml) |
+| 1c       | Turn on the lights 1, 2 & 4 when a occupier of the home is detected if the sun is below and it's before 22:30 | [here](configuration/home_assistant/automation/automation_1c.yaml) |
+| 1d       | Turn on the lights 1, 2, 5 & 6 when a occupier of the home is detected if the sun is below and it's after 22:30 | [here](configuration/home_assistant/automation/automation_1d.yaml) |
+
 ### Living room
+
+| Scenario | Description           | File  |
+| -------- |-------------| -----|
+| 2a       | Set the brightness of the light 3 to 50% and turn off the light 4 when the TV is turned on if the sun is below | [here](configuration/home_assistant/automation/automation_2a.yaml) |
+| 2b       | Set the brightness of the light 3 to 75% when the TV is turned off if the sun is below | [here](configuration/home_assistant/automation/automation_2b.yaml) |
+
 ### Bedroom
+
+| Scenario | Description           | File  |
+| -------- |-------------| -----|
+| 3a       | Simulate a sunrise with the light 5 when the alarm clock rings, switch off the light 5 and switch on the light 6, send the weather conditions to the user| [here](configuration/home_assistant/automation/automation_3a.yaml) |
+| 3b       | Simulate a sunset when the occupier is detected in its bed, switch off all the others lights| [here](configuration/home_assistant/automation/automation_3b.yaml) |
+
 ### Presence simulation
+
+| Scenario | Description           | File  |
+| -------- |-------------| -----|
+| 4a       | Simulate a presence when nobody's home | [here](configuration/home_assistant/automation/automation_4a.yaml) |
 
 ## Demonstration
 Features:
@@ -396,6 +609,6 @@ Features:
 - Simulate the sunrise when the alarm clock rings
 - Simulate the sunset when the person is going to bed
 - Simulate a presence when nobody is at home
-- Control the system with Apple Home applicatioin and Siri
+- Control the system with Apple Home application and Siri
 
 [![OpenHome with Home Assistant and MQTT](images/Youtube.png)](https://www.youtube.com/watch?v=Vh-vzFPCF2U "OpenHome with Home Assistant and MQTT")
