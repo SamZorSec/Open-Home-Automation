@@ -285,7 +285,7 @@ sudo node-gyp BUILDTYPE=Release rebuild
 sudo npm install -g --unsafe-perm homebridge
 ```
 
-To link Homebridge and Home Assistant together, we have to install this plugin.
+To link Homebridge and Home Assistant together, we have to install this plug-in.
 
 ```
 sudo npm install -g homebridge-homeassistant
@@ -362,7 +362,7 @@ Sources:
 Some extra components have to be installed for providing notifications (with Telegram) with weather conditions (with Forecast.io) to the user and for detecting when the user when is entering/leaving the house (with Owntracks and an iBeacon).
 
 ### Telegram
-To use Telegram we need to create a bot. The procedure is discribed [here](https://core.telegram.org/bots).
+To use Telegram we need to create a bot. The procedure is described [here](https://core.telegram.org/bots).
 
 Configuration for Home Assistant:
 
@@ -401,7 +401,7 @@ device_tracker:
 Configuration for the Owntracks application:
 ![Configuration for the Owntracks application](images/Owntracks.png)
 
-Note: The MQTT broker must be accessible from outiside the local network and provide a SSL/TLS secure connexion.
+Note: The MQTT broker must be accessible from outside the local network and provide a SSL/TLS secure connexion.
 
 Sources:
 
@@ -437,12 +437,12 @@ const char*       OTA_PASSWORD      = "[Redacted]";
 LED on the left:
 
 - Shortest leg to GND
-- Longuest leg to D1, with a 220 Ohms resistor
+- Longest leg to D1, with a 220 Ohms resistor
  
 LED on the right:
 
 - Shortest leg to GND
-- Longuest leg to D2, with a 220 Ohms resistor
+- Longest leg to D2, with a 220 Ohms resistor
 
 PIR sensor:
 

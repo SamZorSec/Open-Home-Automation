@@ -4,6 +4,8 @@ trigger:
     entity_id: group.all_devices
     from: 'home'
     to: 'not_home'
+  - platform: sun
+    event: sunset
   - platform: event
     event_type: event_simulate_presence
 condition:  
@@ -25,7 +27,7 @@ action:
       entity_id: >
         light.lamp_{{ (range(1, 6) | random) }}
   # wait some seconds (will be in reality in minutes)
-  - delay: '00:00:{{ (range(2, 10) | random) }}'
+  - delay: '00:{{ (range(2, 10) | random) }}:00'
   # turn off all devices
   - service: light.turn_off
   # wait a little bit before turning on another lamp
