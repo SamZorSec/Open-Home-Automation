@@ -29,7 +29,7 @@ Lights, sensors, switches and more can be built on top of MQTT. This section con
 | [Light](/ha_mqtt_light_with_brightness)     	| A simple example to control a **led** and its brightness	          	|
 | [Light](/ha_mqtt_rgb_light) 				        	| A simple example to control a **RGB led** 				              	    |
 | [Switch](/ha_mqtt_switch)   				        	| A simple example to control a **switch**  	
-| [Switch](../sonoff)   				        	| An alternative firmware for the **Sonoff switch**  					                 	| | 
+| [Switch](https://github.com/mertenats/sonoff)   				        	| An alternative firmware for the **Sonoff switch**  					                 	| | 
 | [Sensor](/ha_mqtt_sensor_dht22) 			      	| A simple example to measure the **temperature** and the **humidity** (DHT22 sensor)|
 | [Sensor](/ha_mqtt_sensor_photocell) 		    	| A simple example to measure the **brightness** (photocell)|
 | [Binary Sensor](/ha_mqtt_binary_sensor_pir) 	| A simple example to detect **motions** (PIR motion sensor)|
