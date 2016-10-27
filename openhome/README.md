@@ -1,8 +1,6 @@
 # HOME AUTOMATION WITH OPEN HARDWARE AND SOFTWARE
-![Features](images/Features.png)
 
 ## Table of contents
-1. [Introduction](#introduction)
 2. [Automation](#automation)
 3. [Parts list](#parts-list)
 4. [Installation of the controller](#installation-of-the-controller)
@@ -11,25 +9,10 @@
 7. [Creation of the automation rules](#creation-of-the-automation-rules)
 8. [Demonstration](#demonstration)
 
-## Introduction
-Home Automation with Open Hardware and Software (a.k.a. OpenHome) was a school project made in a few weeks by a [student](https://www.linkedin.com/in/mertenats) at College of Engineering and Architecture of Fribourg, Switzerland ([HEIA](https://www.heia-fr.ch)).
-
 ### Context
-The main goal of this project is to offer an Open Source alternative to commercialized solutions, like Samsung SmartThings or Philips Hue.
-
 In this project, [Home Assistant](https://home-assistant.io) is used as the controller and the [MQTT](http://mqtt.org) protocol is used for the communication between the controller and the actuators/sensors.
 
 The controller is installed on a Raspberry Pi 3 and the actuators/sensors are built on top of [NodeMCU](http://nodemcu.com/index_cn.html) boards (ESP8266).
-
-### Architecture
-
-Network architecture:
-![Features](images/Architecture_Network.png)
-
-Note: For simplicity, a NodeMCU module is used to connect two lamps and a sensor. In reality, a module will be used for each lamp or sensor.
-
-Application architecture:
-![Features](images/Architecture_MQTT.png)
 
 ## Automation
 In this project, only the lightning is automated, based on the departure/arrival of the occupiers, the state of the television in the living room or the occupancy of the bed in the bedroom. The lightning is also used to simulate a presence when nobody's home.
@@ -46,17 +29,15 @@ The rules are further explained in the chapter [Creation of the automation rules
 ## Parts list
 Hardware:
 
-- 1 Wi-Fi router
-- 1 Raspberry Pi
-- 3 NodeMCU boards (or any module based on an ESP8266 chip)
-- 2 RGB LEDs
-- 4 White LEDs
-- 1 PIR sensor (HC-SR501)
-- 1 Load cell
-- 1 Signal amplifier (HX711)
-- 1 Photo-resistor
-- 1 iBeacon
-- 1 iOS device 
+- Wi-Fi router
+- Raspberry Pi
+- NodeMCU boards (or any module based on an ESP8266 chip)
+- RGB LEDs
+- White LEDs
+- PIR sensor (HC-SR501)
+- Load cell
+- Signal amplifier (HX711)
+- Photo-resistor
 
 Software:
 
