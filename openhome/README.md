@@ -15,8 +15,6 @@ In this project, [Home Assistant](https://home-assistant.io) is used as the cont
 The controller is installed on a Raspberry Pi 3 and the actuators/sensors are built on top of [NodeMCU](http://nodemcu.com/index_cn.html) boards (ESP8266).
 
 ## Automation
-In this project, only the lightning is automated, based on the departure/arrival of the occupiers, the state of the television in the living room or the occupancy of the bed in the bedroom. The lightning is also used to simulate a presence when nobody's home.
-
 Automation rule overview:
 
 - Change the lightning when the TV is switched on or off
@@ -48,42 +46,24 @@ Software:
 
 ## Installation of the controller
 ### Home Assistant
-To install Home Assistant easily, a Raspberry Pi All-In-One Installer is available [here](https://home-assistant.io/getting-started/installation-raspberry-pi-all-in-one/). More recently, a Raspberry Pi image was released [here](https://home-assistant.io/blog/2016/10/01/we-have-raspberry-image-now/). This image comes pre-installed with everything we need to get started with Home Assistant. For this project, we just need Home Assistant and the Mosquitto MQTT broker, so I prefer to install everything manually.
+To install Home Assistant easily, a Raspberry Pi image is available [here](https://home-assistant.io/getting-started/installation-raspberry-pi-image/)
 
-First, we need to update the system and install some Python dependencies.
+Instruction here from above link, and evernote
+
+Update the system.
 
 ```
 sudo apt-get update
 sudo apt-get upgrade
-sudo apt-get install python-pip python3-dev
-sudo pip install --upgrade virtualenv
 ```
-
-Then, we create a new system user, `hass`, to execute the service for Home Assistant. This is a good practice to reduce the exposure of the rest of the system and provide a more granular control over permissions.
-
-```
-sudo adduser --system hass
-```
-
-We create a new directory for Home Assistant and we change its ownership to the new created user.
-
-```
-sudo mkdir /srv/hass
-sudo chown hass /srv/hass
-```
-We become the new user and we set up a virtual Python environment in the directory we just created. A virtual Python environment is a good practice to avoid interaction with the Python packages used by the system or by others applications. Then, we activate it.
 
 ```
 sudo su -s /bin/bash hass
 virtualenv -p python3 /srv/hass
 source /srv/hass/bin/activate
 ```
-And now we are ready to install Home Assistant.
 
-```
-pip3 install --upgrade homeassistant
-```
-Finally we can run Home Assistant by typing the command below.
+Run Home Assistant by typing the command below.
 
 ```
 sudo -u hass -H /srv/hass/bin/hass
@@ -239,13 +219,7 @@ Source:
 
 
 ###Extras
-We need to reload `systemd`to make the daemon aware of the new configuration.
 
-```
-sudo systemctl daemon-reload
-sudo systemctl enable homebridge
-sudo systemctl start homebridge
-```
 ## Installation of the extra components for Home Assistant
 Some extra components have to be installed for providing notifications (with Telegram) with weather conditions (with Darksky) to the user and for detecting when the user when is entering/leaving the house (with Owntracks).
 
