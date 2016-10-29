@@ -15,5 +15,6 @@ binary_sensor:
 - PIR leg 1 - VCC
 - PIR leg 2 - D1/GPIO5
 - PIR leg 3 - GND
-- LED - D0/GPIO16
+- GND - LED - Resistor 220 Ohms - D1/GPIO5
+
 ![Schematic](Schematic.png)
