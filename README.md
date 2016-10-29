@@ -2,8 +2,6 @@
 ## Home Assitant
 > Home Assistant is a home automation platform running on Python 3. The goal of Home Assistant is to be able to track and control all devices at home and offer a platform for automating control [[Home-Assistant](https://github.com/home-assistant/home-assistant)].
 
-![Home-Assitant](https://github.com/home-assistant/home-assistant/blob/dev/docs/screenshots.png)
-
 ## MQTT
 > MQTT is a machine-to-machine (M2M)/"Internet of Things" connectivity protocol. It was designed as an extremely lightweight publish/subscribe messaging transport. It is useful for connections with remote locations where a small code footprint is required and/or network bandwidth is at a premium [[mqtt.org](http://mqtt.org)].
 
