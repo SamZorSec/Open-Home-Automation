@@ -14,8 +14,8 @@ mqtt:
   password: '[Redacted]'
 ```
 
-## Devices
-Lights, sensors, switches and more can be built on top of MQTT. The following based on MQTT on a NodeMCU board (ESP8266).
+## Examples
+Lights, sensors, switches and more can be built on top of MQTT. The following are examples based on MQTT on a NodeMCU board (ESP8266). These are limited use examples, and not inted to be used in the HA system. For practical examples see [here](https://github.com/HalEEfacts/Open-Home-Automation/tree/master/openhome/sketches).
 
 | Title / link     							              	| Description        											                              | 
 |-----------------------------------------------|-----------------------------------------------------------------------|
@@ -33,5 +33,3 @@ Lights, sensors, switches and more can be built on top of MQTT. The following ba
 An advanced example, using WiFiManager, mDNS and OTA, is available [here](/ha_mqtt_light_with_WiFiManager_mDNS_and_OTA).
 
 A school project based on Home Assistant, MQTT and NodeMCU modules is available [here](openhome) and the demo, [here](https://www.youtube.com/watch?v=Vh-vzFPCF2U).
-
-*If you like the content of this repo, please add a star! Thank you!*
