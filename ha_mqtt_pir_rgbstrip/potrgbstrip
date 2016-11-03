@@ -1,0 +1,56 @@
+/* Analog Read to LED Brightness
+ * ------------------ 
+ *
+ * turns up and down a light emitting diode(LED) strip connected to digital  
+ * pin x. The brightness of the LED will depend on
+ * the value obtained by analogRead(). In the easiest case we connect
+ * a potentiometer to analog pin 2.
+ *
+ *
+ */
+
+/*
+ * LED Setup
+ */
+#include <FastLED.h>
+
+#define DATA_PIN     6
+
+// Information about the LED strip itself
+#define NUM_LEDS    30
+#define CHIPSET     WS2812B
+#define COLOR_ORDER GRB
+#define BRIGHTNESS	255   // 0-255, higher number is brighter. 
+#define SATURATION	255   // 0-255, 0 is pure white, 255 is fully saturated color
+#define potPin		2	  // Pot is connected to pin 2, 5v, and gnd
+CRGB leds[NUM_LEDS];
+
+
+
+int val = 0;       // variable to store the value coming from the sensor
+
+void setup() {
+	Serial.begin(9600); 	//debug mode
+	delay( 3000 );			// power-up safety delay
+	FastLED.addLeds<CHIPSET, DATA_PIN, COLOR_ORDER>(leds, NUM_LEDS);
+	FastLED.setBrightness( BRIGHTNESS );
+
+}
+
+
+
+void loop() {
+	for( int i = 0; i < NUM_LEDS; i++) {
+		leds[i] = CRGB::White;
+		//leds[i] = 0xFFFAF0;
+	}
+	
+    FastLED.show();
+	int val = analogRead(potPin);    // read the value from the sensor
+    Serial.println(val);
+
+	int LedBrightness = map(val, 0, 1023, 0, 255); //convert the sensor to Brightnes scale (0-255)
+	Serial.println(LedBrightness);
+
+	FastLED.setBrightness( LedBrightness );
+}
