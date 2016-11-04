@@ -17,4 +17,4 @@ binary_sensor:
 - PIR leg 3 - GND
 - GND - LED - Resistor 220 Ohms - D1/GPIO5
 
-![Schematic](Schematic.png)
+![Schematic](esp8266_pir_led_schematic_bb.png)
