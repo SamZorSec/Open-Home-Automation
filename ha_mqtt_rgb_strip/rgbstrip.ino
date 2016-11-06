@@ -1,3 +1,4 @@
+//https://github.com/FastLED/FastLED/wiki/ESP8266-notes
 #define FASTLED_ESP8266_NODEMCU_PIN_ORDER
 #include <FastLED.h>
 
