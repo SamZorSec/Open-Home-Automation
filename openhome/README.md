@@ -477,5 +477,3 @@ Features:
 - Control the system with Apple Home application and Siri
 
 [![OpenHome with Home Assistant and MQTT](images/Youtube.png)](https://www.youtube.com/watch?v=Vh-vzFPCF2U "OpenHome with Home Assistant and MQTT")
-
-*If you like the content of this repo, please add a star! Thank you!*
