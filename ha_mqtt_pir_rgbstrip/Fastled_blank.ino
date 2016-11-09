@@ -1,3 +1,4 @@
+//from https://github.com/FastLED/FastLED/wiki/Basic-usage
 #include <FastLED.h>
 #define NUM_LEDS 60
 #define DATA_PIN 2
@@ -20,4 +21,13 @@ void loop() {
       leds[0] = CRGB::Black;
       FastLED.show();
       delay(1000);
+      
+      // at the same time? have a blue dot move up the line
+      for(int dot = 0; dot < NUM_LEDS; dot++) { 
+            leds[dot] = CRGB::Blue;
+            FastLED.show();
+            // clear this led for the next time around the loop
+            leds[dot] = CRGB::Black;
+            delay(30);
+       }
 }
