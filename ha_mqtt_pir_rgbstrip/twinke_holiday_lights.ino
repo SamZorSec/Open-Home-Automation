@@ -5,12 +5,12 @@
 #endif
 
 
-#define NUM_LEDS      100
-#define LED_TYPE   WS2811
+#define NUM_LEDS      60
+#define LED_TYPE   WS2812B
 #define COLOR_ORDER   GRB
-#define DATA_PIN        3
+#define DATA_PIN        2
 //#define CLK_PIN       4
-#define VOLTS          12
+#define VOLTS          5
 #define MAX_MA       4000
 
 //  TwinkleFOX: Twinkling 'holiday' lights that fade in and out.
