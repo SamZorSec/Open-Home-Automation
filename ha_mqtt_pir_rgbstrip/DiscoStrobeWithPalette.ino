@@ -1,5 +1,7 @@
 #include "FastLED.h"
 
+//WARNING: STROBE EFFECT WILL MESS WITH YOUR EYES!
+
 // DiscoStrobeWithPalette
 // *Flashing* rainbow lights that zoom back and forth to a beat.
 // See your doctor before using this code if you have certain neurological conditions.
