@@ -18,7 +18,7 @@ void setup() {
 
 //ifi its not going to be just one patter, then define a list of patterns to cycle through.  Each is defined as a separate function below.
 typedef void (*SimplePatternList[])();
-SimplePatternList gPatterns = { redmoves, blueupline }; //and more to list here, or re-arange
+SimplePatternList gPatterns = { candycane, redmoves, blueupline }; //and more to list here, or re-arange
 
 uint8_t gCurrentPatternNumber = 0; // Index number of which pattern is current (start at beginning of list when first turned on)
 uint8_t gHue = 0; // rotating "base color" used by many of the patterns (remove???????)
@@ -72,5 +72,15 @@ void blueupline()
        }
 }
       
-      
+void candycane()
+{
+   //alternating red and white
+       for(int dot = 0; dot < NUM_LEDS; dot++) { 
+            leds[dot] = CRGB::Red;
+            leds[dot+1] = CRGB::White;
+            FastLED.show();
+            // clear this led for the next time around the loop
+            delay(100);
+       }
+}
 
