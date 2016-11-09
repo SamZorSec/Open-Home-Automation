@@ -1,5 +1,5 @@
 #include "FastLED.h"
-
+//DOESNT WORK RIGHT NOW< https://gist.github.com/kriegsman/841c8cd66ed40c6ecaae
 // This sketch shows one way to define a 'timed playlist'
 // of animations that automatically rotate on a custom schedule.
 //
