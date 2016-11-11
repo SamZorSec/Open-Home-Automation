@@ -52,12 +52,12 @@ void redmoves()
   // Turn the first led red for 1/2 second
       leds[0] = CRGB::Red; 
       FastLED.show();
-      millis(500);
+      delay(500);
 
       // Set the first led back to black (off) for 1/2 second
       leds[0] = CRGB::Black;
       FastLED.show();
-      millis(500);
+      delay(500);
 }
 
 void blueupline() 
@@ -68,7 +68,7 @@ void blueupline()
             FastLED.show();
             // clear this led for the next time around the loop
             leds[dot] = CRGB::Black;
-            millis(30);
+            delay(30);
        }
 }
       
