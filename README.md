@@ -23,14 +23,14 @@ mqtt:
 ## Examples
 Lights, sensors, switches and more can be built on top of MQTT. This section contains a few examples based on MQTT and on a NodeMCU board (ESP8266).
 
-| Title / link     							              	| Description        											                              | 
+| Title / link     							              	| Description        											                              |
 |-----------------------------------------------|-----------------------------------------------------------------------|
 | [Light](/ha_mqtt_light)     				        	| A simple example to control a **led**     					                	|
 | [Light](/ha_mqtt_light_with_brightness)     	| A simple example to control a **led** and its brightness	          	|
 | [Light](/ha_mqtt_rgb_light) 				        	| A simple example to control a **RGB led** 				              	    |
 | [Light](https://github.com/mertenats/Arilux_AL-LC03)| An alternative firmware for the **Arilux AL-LC0X LED controller**	|
 | [Switch](/ha_mqtt_switch)   				        	| A simple example to control a **switch**  	
-| [Switch](https://github.com/mertenats/sonoff) | An alternative firmware for the **Sonoff switches**  					          | 
+| [Switch](https://github.com/mertenats/sonoff) | An alternative firmware for the **Sonoff switches**  					          |
 | [Sensor](/ha_mqtt_sensor_dht22) 			      	| A simple example to measure the **temperature** and the **humidity** (DHT22 sensor)|
 | [Sensor](/ha_mqtt_sensor_photocell) 		    	| A simple example to measure the **brightness** (photocell)|
 | [Binary Sensor](/ha_mqtt_binary_sensor_pir) 	| A simple example to detect **motions** (PIR motion sensor)|
@@ -40,5 +40,13 @@ Lights, sensors, switches and more can be built on top of MQTT. This section con
 An advanced example, using WiFiManager, mDNS and OTA, is available [here](/ha_mqtt_light_with_WiFiManager_mDNS_and_OTA).
 
 A school project based on Home Assistant, MQTT and NodeMCU modules is available [here](openhome) and the demo, [here](https://www.youtube.com/watch?v=Vh-vzFPCF2U).
+
+> THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+  SOFTWARE.
 
 *If you like the content of this repo, please add a star! Thank you!*
