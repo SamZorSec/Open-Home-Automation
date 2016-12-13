@@ -220,6 +220,7 @@ void setup() {
   pinMode(RGB_LIGHT_BLUE_PIN, OUTPUT);
   pinMode(RGB_LIGHT_RED_PIN, OUTPUT);
   pinMode(RGB_LIGHT_GREEN_PIN, OUTPUT);
+  analogWriteRange(255);
   setColor(0, 0, 0);
 
   // init the WiFi connection
