@@ -165,6 +165,7 @@ void setup() {
 
   // init the led
   pinMode(LIGHT_PIN, OUTPUT);
+  analogWriteRange(255);
   setLightState();
 
   // init the WiFi connection
