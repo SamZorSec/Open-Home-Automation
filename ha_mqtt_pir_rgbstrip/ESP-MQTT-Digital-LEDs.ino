@@ -17,10 +17,10 @@ Copied from Bruh Automation
 
 /************ FastLED Defintions ******************/
 
-#define DATA_PIN    5 //on the NodeMCU 1.0, FastLED will default to the D5 pin after throwing an error during compiling. Leave as is. 
-#define LED_TYPE    WS2811 //change to match your LED type
-#define COLOR_ORDER BRG //change to match your LED configuration
-#define NUM_LEDS    185 //change to match your setup
+#define DATA_PIN    2 //on the NodeMCU 1.0, FastLED will default to the D5 pin after throwing an error during compiling. Leave as is. 
+#define LED_TYPE    WS2812B //change to match your LED type
+#define COLOR_ORDER GRB //change to match your LED configuration
+#define NUM_LEDS    60 //change to match your setup
 
 
 //No Changes Required After This Point
