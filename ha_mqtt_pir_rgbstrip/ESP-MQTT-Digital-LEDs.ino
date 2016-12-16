@@ -1,11 +1,5 @@
 /*
-  .______   .______    __    __   __    __          ___      __    __  .___________.  ______   .___  ___.      ___   .___________. __    ______   .__   __.
-  |   _  \  |   _  \  |  |  |  | |  |  |  |        /   \    |  |  |  | |           | /  __  \  |   \/   |     /   \  |           ||  |  /  __  \  |  \ |  |
-  |  |_)  | |  |_)  | |  |  |  | |  |__|  |       /  ^  \   |  |  |  | `---|  |----`|  |  |  | |  \  /  |    /  ^  \ `---|  |----`|  | |  |  |  | |   \|  |
-  |   _  <  |      /  |  |  |  | |   __   |      /  /_\  \  |  |  |  |     |  |     |  |  |  | |  |\/|  |   /  /_\  \    |  |     |  | |  |  |  | |  . `  |
-  |  |_)  | |  |\  \-.|  `--'  | |  |  |  |     /  _____  \ |  `--'  |     |  |     |  `--'  | |  |  |  |  /  _____  \   |  |     |  | |  `--'  | |  |\   |
-  |______/  | _| `.__| \______/  |__|  |__|    /__/     \__\ \______/      |__|      \______/  |__|  |__| /__/     \__\  |__|     |__|  \______/  |__| \__|
-This is the code I use for my MQTT LED Strip controlled from Home Assistant. It's a work in progress, but works great! Huge shout out to all the people I copied ideas from as a scoured around the internet. If you recoginze your code here and want credit, let me know and I'll get that added. Cheers! 
+Copied from Bruh Automation
 */
 
 
@@ -13,10 +7,9 @@ This is the code I use for my MQTT LED Strip controlled from Home Assistant. It'
 #include <PubSubClient.h>
 #include "FastLED.h"
 
-
 /************ WIFI and MQTT INFORMATION (CHANGE THESE FOR YOUR SETUP) ******************/
-#define wifi_ssid "YourSSID" //enter your WIFI SSID
-#define wifi_password "YourWIFIPassword" //enter your WIFI Password
+#define wifi_ssid "SSID" //enter your WIFI SSID
+#define wifi_password "PASS" //enter your WIFI Password
 
 #define mqtt_server "YOURMQTTSERVER.COM" // Enter your MQTT server adderss or IP. I use my DuckDNS adddress (yourname.duckdns.org) in this field
 #define mqtt_user "YourUSERNAME" //enter your MQTT username
@@ -127,6 +120,7 @@ bool gReverseDirection = false;
 /********BPM**********/
 uint8_t gHue = 0;
 char message_buff[100];
+
 
 
 WiFiClient espClient;
