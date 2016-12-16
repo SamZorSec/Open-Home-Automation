@@ -121,7 +121,8 @@ bool gReverseDirection = false;
 uint8_t gHue = 0;
 char message_buff[100];
 
-
+/********Fastled_HSV_rainbow*******/
+uint8_t HSVhue = 0;
 
 WiFiClient espClient;
 PubSubClient client(espClient);
@@ -294,7 +295,11 @@ void loop() {
     int pos = random16(NUM_LEDS);
     leds[pos] += CRGB(Rcolor + random8(64), Gcolor, Bcolor);
   }
-
+  
+  if (setEffect == "FastledHSV") {
+    static uint8_t hue = 0;
+    FastLED.showColor(CHSV(hue++, 255, 255)); //hue (color), saturation, brightness
+  }
 
   if (setEffect == "Rainbow") {
     // FastLED's built-in rainbow generator
