@@ -60,7 +60,8 @@ CRGB leds[NUM_LEDS];
 
 /****************FOR CANDY CANE***************/
 CRGBPalette16 currentPalettestriped; //for Candy Cane
-CRGBPalette16 gPal; //for fire
+
+/****************FOR REDGREENSTRIPE**************/
 
 /****************FOR NOISE***************/
 static uint16_t dist;         // A random number for our noise generator.
@@ -135,6 +136,7 @@ void setup() {
   FastLED.setBrightness(brightness);
 
   setupStripedPalette( CRGB::Red, CRGB::Red, CRGB::White, CRGB::White); //for CANDY CANE
+  setupRedGreenPalette( CRGB::Red, CRGB::Red, CRGB::Green, CRGB::Green); //for RedGreenStripe
 
     gPal = HeatColors_p; //for FIRE
 
@@ -436,7 +438,16 @@ void loop() {
                   startIndex, 16, /* higher = narrower stripes */
                   currentPalettestriped, 255, LINEARBLEND);
   }
+ 
+  if (setEffect == "RedGreenStriped") {
+    static uint8_t startIndex = 0;
+    startIndex = startIndex + 1; /* higher = faster motion */
 
+    fill_palette( leds, NUM_LEDS,
+                  startIndex, 16, /* higher = narrower stripes */
+                  currentPalettestriped, 255, LINEARBLEND);
+  }
+  
 
   if (setEffect == "Cyclon Rainbow") {                    //Single Dot Down
   static uint8_t hue = 0;
@@ -534,7 +545,15 @@ void loop() {
 void setupStripedPalette( CRGB A, CRGB AB, CRGB B, CRGB BA)
 {
   currentPalettestriped = CRGBPalette16(
-                            A, A, A, A, A, A, A, A, B, B, B, B, B, B, B, B
+                            A, A, A, A, A, A, A, AB, B, B, B, B, B, B, B, BA
+                            //    A, A, A, A, A, A, A, A, B, B, B, B, B, B, B, B
+                          );
+}
+
+void setupRedGreenPalette( CRGB A, CRGB AB, CRGB B, CRGB BA)
+{
+  currentPalettestriped = CRGBPalette16(
+                            A, A, A, A, A, A, A, AB, B, B, B, B, B, B, B, BA
                             //    A, A, A, A, A, A, A, A, B, B, B, B, B, B, B, B
                           );
 }
