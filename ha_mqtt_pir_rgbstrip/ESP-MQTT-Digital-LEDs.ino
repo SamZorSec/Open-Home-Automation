@@ -60,6 +60,7 @@ CRGB leds[NUM_LEDS];
 
 /****************FOR CANDY CANE***************/
 CRGBPalette16 currentPalettestriped; //for Candy Cane
+CRGBPalette16 gPal; //for fire
 
 /****************FOR REDGREENSTRIPE**************/
 
