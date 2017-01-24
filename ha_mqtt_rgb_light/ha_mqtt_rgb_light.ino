@@ -92,7 +92,7 @@ PubSubClient client(wifiClient);
 // function called to adapt the brightness and the color of the led
 void setColor(uint8_t p_red, uint8_t p_green, uint8_t p_blue) {
   // convert the brightness in % (0-100%) into a digital value (0-255)
-  uint8_t brightness = map(m_rgb_brightness, 0, 100, 0, 1023);
+  uint8_t brightness = map(m_rgb_brightness, 0, 100, 0, 255);
 
   analogWrite(RGB_LIGHT_RED_PIN, map(p_red, 0, 255, 0, brightness));
   analogWrite(RGB_LIGHT_GREEN_PIN, map(p_green, 0, 255, 0, brightness));
