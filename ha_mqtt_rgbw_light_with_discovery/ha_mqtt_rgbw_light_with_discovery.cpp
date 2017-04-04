@@ -1,4 +1,4 @@
-#include "ha_mqtt_rgbw_ligh_with_discovery.h"
+#include "ha_mqtt_rgbw_light_with_discovery.h"
 
 volatile uint8_t effect = EFFECT_NOT_DEFINED;
 

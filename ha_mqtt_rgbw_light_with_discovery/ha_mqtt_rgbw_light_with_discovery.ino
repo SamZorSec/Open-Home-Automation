@@ -9,7 +9,7 @@
 #include <PubSubClient.h>         // https://github.com/knolleary/pubsubclient
 #include <ArduinoJson.h>          // https://github.com/bblanchon/ArduinoJson
 #include <ArduinoOTA.h>
-#include "ha_mqtt_rgbw_ligh_with_discovery.h"
+#include "ha_mqtt_rgbw_light_with_discovery.h"
 
 #if defined(DEBUG_TELNET)
 WiFiServer  telnetServer(23);
