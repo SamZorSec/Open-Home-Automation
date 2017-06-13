@@ -32,7 +32,8 @@ Lights, sensors, switches and more can be built on top of MQTT. This section con
 | [Light](/ha_mqtt_rgbw_ligh_with_discovery) 	  | A simple example to control a **RGBW led**, based on the **MQTT JSON Light** component (brightness, rgb, white, color temperature and effects) and including the **MQTT Discovery**			              	    |
 | [Light](https://github.com/mertenats/AI-Thinker_RGBW_Bulb) 	  | An alternative firmware for **AI-Thinker RGBW bulbs**, based on the **MQTT JSON Light** component and including the **MQTT Discovery**	functionality		              	    |
 | [Switch](/ha_mqtt_switch)   				        	| A simple example to control a **switch**  	
-| [Switch](https://github.com/mertenats/sonoff) | An alternative firmware for the **Sonoff switches**  					          |
+| [Switch](https://github.com/mertenats/Itead_Sonoff/tree/master/Sonoff_Basic) | An alternative firmware for the **Sonoff Basic** switches  					          |
+| [Switch](https://github.com/mertenats/Itead_Sonoff/tree/master/Sonoff_TH) | An alternative firmware for the **Sonoff TH** switches, including the **MQTT Discovery**	functionality				          |
 | [Sensor](/ha_mqtt_sensor_dht22) 			      	| A simple example to measure the **temperature** and the **humidity** (DHT22 sensor)|
 | [Sensor](/ha_mqtt_sensor_photocell) 		    	| A simple example to measure the **brightness** (photocell)|
 | [Binary Sensor](/ha_mqtt_binary_sensor_pir) 	| A simple example to detect **motions** (PIR motion sensor)|
