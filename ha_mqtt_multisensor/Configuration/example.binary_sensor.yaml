@@ -1,0 +1,22 @@
+# Example configuration.yaml entry
+binary_sensor:
+  - platform: mqtt
+    name: 'Motion'
+    state_topic: '<CHIP_ID>/sensor/motion'
+    availability_topic: '<CHIP_ID>/status'
+    payload_available: 'online'
+    payload_not_available: 'offline'
+    device_class: motion
+  - platform: mqtt
+    name: 'Door'
+    state_topic: '<CHIP_ID>/sensor/door'
+    availability_topic: '<CHIP_ID>/status'
+    payload_available: 'online'
+    payload_not_available: 'offline'
+    device_class: opening
+  - platform: mqtt
+    name: 'Button'
+    state_topic: '<CHIP_ID>/sensor/button'
+    availability_topic: '<CHIP_ID>/status'
+    payload_available: 'online'
+    payload_not_available: 'offline'

@@ -1,3 +1,5 @@
 
 .DS_Store
 ha_mqtt_multisensor/config.h
+ha_mqtt_multisensor/Configuration/binary_sensor.yaml
+ha_mqtt_multisensor/Configuration/sensor.yaml

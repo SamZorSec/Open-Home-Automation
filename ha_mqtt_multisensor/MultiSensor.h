@@ -36,7 +36,7 @@ class MultiSensor {
     bool getPirState(void);
 #endif
 #if defined(LDR_SENSOR)
-    uint16_t getLdrValue(void);
+    uint16_t getLux(void);
 #endif
 #if defined(DHT22_SENSOR)
     float getTemperature(void);
@@ -60,6 +60,9 @@ class MultiSensor {
 #if defined(DHT22_SENSOR)
     float _temperature = 0;
     float _humidity = 0;
+#endif
+#if defined(BUTTON_SENSOR)
+    bool _buttonState = false;
 #endif
 };
 #endif

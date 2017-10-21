@@ -91,6 +91,7 @@ void MultiSensor::handleEvt(void) {
 #endif
 #if defined(BUTTON_SENSOR)
     case BUTTON_SENSOR_EVT:
+      this->_buttonState = !this->_buttonState;
       this->_callback(BUTTON_SENSOR_EVT);
       evt = NO_SENSOR_EVT;
       break;
@@ -180,8 +181,10 @@ bool MultiSensor::getPirState(void) {
 #endif
 
 #if defined(LDR_SENSOR)
-uint16_t MultiSensor::getLdrValue(void) {
-  return this->_ldrValue;
+uint16_t MultiSensor::getLux(void) {
+  // http://forum.arduino.cc/index.php?topic=37555.0
+  float voltage = this->_ldrValue * LDR_VOLTAGE_PER_ADC_PRECISION;   
+  return 500 / (LDR_RESISTOR_VALUE * ((LDR_REFERENCE_VOLTAGE - voltage) / voltage));
 }
 #endif
 
@@ -197,6 +200,6 @@ float MultiSensor::getHumidity(void) {
 
 #if defined(BUTTON_SENSOR)
 bool MultiSensor::getButtonState(void) {
-  return true;
+  return this->_buttonState;
 }
 #endif
