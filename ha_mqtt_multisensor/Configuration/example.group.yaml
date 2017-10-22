@@ -1,0 +1,10 @@
+group:
+  multisensor:
+    name: 'Multisensor'
+    entities:
+      - sensor.temperature
+      - sensor.humidity
+      - sensor.luminosity
+      - binary_sensor.motion
+      - binary_sensor.door
+      - binary_sensor.button

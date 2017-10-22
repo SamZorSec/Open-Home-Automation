@@ -1,0 +1,23 @@
+# Example configuration.yml entry
+sensor:
+  - platform: mqtt
+    name: 'Temperature'
+    state_topic: '<CHIP_ID>/sensor/temperature'
+    unit_of_measurement: '°C'
+    availability_topic: '<CHIP_ID>/status'
+    payload_available: 'online'
+    payload_not_available: 'offline'
+  - platform: mqtt
+    name: 'Humidity'
+    state_topic: '<CHIP_ID>/sensor/humidity'
+    unit_of_measurement: '%'
+    availability_topic: '<CHIP_ID>/status'
+    payload_available: 'online'
+    payload_not_available: 'offline'
+  - platform: mqtt
+    name: 'Luminosity'
+    state_topic: '<CHIP_ID>/sensor/lux'
+    unit_of_measurement: 'lux'
+    availability_topic: '<CHIP_ID>/status'
+    payload_available: 'online'
+    payload_not_available: 'offline'
