@@ -176,6 +176,39 @@ void connectToMQTT() {
       if (mqttClient.connect(MQTT_CLIENT_ID, MQTT_USERNAME, MQTT_PASSWORD, MQTT_AVAILABILITY_TOPIC, 0, 1, "offline")) {
         DEBUG_PRINTLN(F("INFO: The client is successfully connected to the MQTT broker"));
         publishToMQTT(MQTT_AVAILABILITY_TOPIC, "online");
+
+        // publish sensors' states
+#if defined(DOOR_SENSOR)
+        if (!ms.getDoorState()) {
+          publishToMQTT(MQTT_DOOR_SENSOR_TOPIC, MQTT_PAYLOAD_ON);
+        } else {
+          publishToMQTT(MQTT_DOOR_SENSOR_TOPIC, MQTT_PAYLOAD_OFF);
+        }
+#endif
+#if defined(PIR_SENSOR)
+        if (ms.getPirState()) {
+          publishToMQTT(MQTT_PIR_SENSOR_TOPIC, MQTT_PAYLOAD_ON);
+        } else {
+          publishToMQTT(MQTT_PIR_SENSOR_TOPIC, MQTT_PAYLOAD_OFF);
+        }
+#endif
+#if defined(LDR_SENSOR)
+        itoa (ms.getLux(), MQTT_PAYLOAD, 10);
+        publishToMQTT(MQTT_LDR_SENSOR_TOPIC, MQTT_PAYLOAD);
+#endif
+#if defined(DHT22_SENSOR)
+        dtostrf(ms.getTemperature(), 2, 2, MQTT_PAYLOAD);
+        publishToMQTT(MQTT_DHT22_TEMPERATURE_SENSOR_TOPIC, MQTT_PAYLOAD);
+        dtostrf(ms.getHumidity(), 2, 2, MQTT_PAYLOAD);
+        publishToMQTT(MQTT_DHT22_HUMIDITY_SENSOR_TOPIC, MQTT_PAYLOAD);
+#endif
+#if defined(BUTTON_SENSOR)
+        if (ms.getButtonState()) {
+          publishToMQTT(MQTT_BUTTON_SENSOR_TOPIC, MQTT_PAYLOAD_ON);
+        } else {
+          publishToMQTT(MQTT_BUTTON_SENSOR_TOPIC, MQTT_PAYLOAD_OFF);
+        }
+#endif
       } else {
         DEBUG_PRINTLN(F("ERROR: The connection to the MQTT broker failed"));
         DEBUG_PRINT(F("INFO: MQTT username: "));

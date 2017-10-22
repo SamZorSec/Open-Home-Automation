@@ -2,7 +2,7 @@
 //  CONFIGURATION - HARDWARE
 ///////////////////////////////////////////////////////////////////////////
 // Door sensor
-#define DOOR_SENSOR                     D8
+#define DOOR_SENSOR                     D3
 #if defined(DOOR_SENSOR)
 #define DOOR_SENSOR_NAME                "door" // used for the MQTT topic
 #endif
@@ -18,7 +18,7 @@
 #if defined(LDR_SENSOR)
 #define LDR_SENSOR_NAME                 "lux"
 #define LDR_OFFSET_VALUE                25
-#define LDR_MEASURE_INTERVAL            1000  // [ms]
+#define LDR_MEASURE_INTERVAL            15000 // [ms]
 #define LDR_REFERENCE_VOLTAGE           3.3   // [v]
 #define LDR_ADC_PRECISION               1024  // 10 bits
 #define LDR_VOLTAGE_PER_ADC_PRECISION   LDR_REFERENCE_VOLTAGE / LDR_ADC_PRECISION
@@ -30,9 +30,9 @@
 #if defined(DHT22_SENSOR)
 #define DHT22_TEMPERATURE_SENSOR_NAME   "temperature"
 #define DHT22_HUMIDITY_SENSOR_NAME      "humidity"
-#define DHT22_TEMPERATURE_OFFSET_VALUE  0.5   // [°C]
-#define DHT22_HUMIDITY_OFFSET_VALUE     1     // [%]
-#define DHT22_MEASURE_INTERVAL          5000  // [ms]
+#define DHT22_TEMPERATURE_OFFSET_VALUE  0.2   // [°C]
+#define DHT22_HUMIDITY_OFFSET_VALUE     0.5   // [%]
+#define DHT22_MEASURE_INTERVAL          30000 // [ms]
 #endif
 
 // Button
@@ -40,6 +40,7 @@
 #if defined(BUTTON_SENSOR)
 #define BUTTON_SENSOR_NAME              "button"
 #endif
+
 
 ///////////////////////////////////////////////////////////////////////////
 //  CONFIGURATION - SOFTWARE

@@ -45,7 +45,7 @@ void MultiSensor::init(void) {
 #if defined(DOOR_SENSOR)
   pinMode(DOOR_SENSOR, INPUT_PULLUP);
   attachInterrupt(digitalPinToInterrupt(DOOR_SENSOR), doorSensorISR, CHANGE);
-  this->_doorState = digitalRead(DOOR_SENSOR);
+  this->_doorState = this->_readDoorState();
 #endif
 #if defined(PIR_SENSOR)
   pinMode(PIR_SENSOR, INPUT_PULLUP);
@@ -58,8 +58,9 @@ void MultiSensor::init(void) {
 #endif
 #if defined(DHT22_SENSOR)
   dht.begin();
-  this->_temperature = dht.readTemperature();
-  this->_humidity = dht.readHumidity();
+  delay(2000);
+  this->_readTemperature();
+  this->_readHumidity();
 #endif
 #if defined(BUTTON_SENSOR)
   pinMode(BUTTON_SENSOR, INPUT);
@@ -73,7 +74,7 @@ void MultiSensor::handleEvt(void) {
       break;
 #if defined(DOOR_SENSOR)
     case DOOR_SENSOR_EVT:
-      if (digitalRead(DOOR_SENSOR) != this->_doorState) {
+      if (this->_readDoorState() != this->_doorState) {
         this->_doorState = !this->_doorState;
         this->_callback(DOOR_SENSOR_EVT);
       }
@@ -123,7 +124,7 @@ void MultiSensor::loop(void) {
   if (lastLdrSensorMeasure + LDR_MEASURE_INTERVAL <= millis()) {
     lastLdrSensorMeasure = millis();
     uint16_t currentLdrValue = analogRead(LDR_SENSOR);
-    if (currentLdrValue <= this->_ldrValue - LDR_OFFSET_VALUE || currentLdrValue > this->_ldrValue + LDR_OFFSET_VALUE) {
+    if (currentLdrValue <= this->_ldrValue - LDR_OFFSET_VALUE || currentLdrValue >= this->_ldrValue + LDR_OFFSET_VALUE) {
       this->_ldrValue = currentLdrValue;
       evt = LDR_SENSOR_EVT;
       return;
@@ -135,8 +136,8 @@ void MultiSensor::loop(void) {
   static unsigned long lastDht22TemperatureSensorMeasure = 0;
   if (lastDht22TemperatureSensorMeasure + DHT22_MEASURE_INTERVAL <= millis()) {
     lastDht22TemperatureSensorMeasure = millis();
-    float currentDht22Temperature = dht.readTemperature();
-    if (currentDht22Temperature <= this->_temperature - DHT22_TEMPERATURE_OFFSET_VALUE || currentDht22Temperature > this->_temperature + DHT22_TEMPERATURE_OFFSET_VALUE) {
+    float currentDht22Temperature = this->_readTemperature();
+    if (currentDht22Temperature <= this->_temperature - DHT22_TEMPERATURE_OFFSET_VALUE || currentDht22Temperature >= this->_temperature + DHT22_TEMPERATURE_OFFSET_VALUE) {
       this->_temperature = currentDht22Temperature;
       evt = DHT22_TEMPERATURE_SENSOR_EVT;
       return;
@@ -146,8 +147,8 @@ void MultiSensor::loop(void) {
   static unsigned long lastDht22HumiditySensorMeasure = 0;
   if (lastDht22HumiditySensorMeasure + DHT22_MEASURE_INTERVAL <= millis()) {
     lastDht22HumiditySensorMeasure = millis();
-    float currentDht22Humidity = dht.readHumidity();
-    if (currentDht22Humidity <= this->_humidity - DHT22_HUMIDITY_OFFSET_VALUE || currentDht22Humidity > this->_humidity + DHT22_HUMIDITY_OFFSET_VALUE) {
+    float currentDht22Humidity = this->_readHumidity();
+    if (currentDht22Humidity <= this->_humidity - DHT22_HUMIDITY_OFFSET_VALUE || currentDht22Humidity >= this->_humidity + DHT22_HUMIDITY_OFFSET_VALUE) {
       this->_humidity = currentDht22Humidity;
       evt = DHT22_HUMIDITY_SENSOR_EVT;
       return;
@@ -169,6 +170,10 @@ void MultiSensor::setCallback(void (*callback)(uint8_t)) {
 //  Getters 
 ///////////////////////////////////////////////////////////////////////////
 #if defined(DOOR_SENSOR)
+bool MultiSensor::_readDoorState(void) {
+  return digitalRead(DOOR_SENSOR);
+}
+
 bool MultiSensor::getDoorState(void) {
   return this->_doorState;
 }
@@ -189,6 +194,32 @@ uint16_t MultiSensor::getLux(void) {
 #endif
 
 #if defined(DHT22_SENSOR)
+float MultiSensor::_readTemperature(void) {
+  float temperature = dht.readTemperature();
+//  while (isnan(temperature)) {
+//    delay(1000);
+//    temperature = dht.readTemperature();
+//    DEBUG_PRINTLN(F("ERROR: Error while reading the current temperature"));
+//  }
+  if (isnan(temperature)) {
+    return this->_temperature;
+  }
+  return temperature;
+}
+
+float MultiSensor::_readHumidity(void) {
+  float humidity = dht.readHumidity();
+//  while (isnan(humidity)) {
+//    delay(1000);
+//    humidity = dht.readHumidity();
+//    DEBUG_PRINTLN(F("ERROR: Error while reading the current humidity"));
+//  }
+  if (isnan(humidity)) {
+    return this->_humidity;
+  }
+  return humidity;
+}
+
 float MultiSensor::getTemperature(void) {
   return this->_temperature;
 }

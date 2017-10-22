@@ -49,6 +49,7 @@ class MultiSensor {
     void (*_callback)(uint8_t);
     void handleEvt(void);
 #if defined(DOOR_SENSOR)
+    bool _readDoorState(void);
     bool _doorState = false;
 #endif
 #if defined(PIR_SENSOR)
@@ -58,6 +59,8 @@ class MultiSensor {
     uint16_t _ldrValue = 0;
 #endif
 #if defined(DHT22_SENSOR)
+    float _readTemperature(void);
+    float _readHumidity(void);
     float _temperature = 0;
     float _humidity = 0;
 #endif
