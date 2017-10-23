@@ -41,7 +41,8 @@ Button ON/OFF. Schematic available [here](https://github.com/mertenats/Open-Home
 
 - Switch leg 1 - VCC
 - Switch leg 2 - D1 - Resistor 10K Ohms - GND
-![Schematic](images/Schematic.jpg)
+
+![Schematic](Images/Schematic.jpg)
 
 ## Configuration
 To configure this sketch, you have to rename the header file `example.config.h` in `config.h`. Then, it is possible to enable/disable sensors in the `HARDWARE SECTION` or edit your Wi-Fi and MQTT credentials in the `SOFTWARE SECTION`.
