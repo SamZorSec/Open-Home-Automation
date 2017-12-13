@@ -1,0 +1,12 @@
+default_view:
+  view: yes
+  entities:
+    - group.alarm_clock
+
+alarm_clock:
+  name: 'Réveil'
+  entities:
+    - sensor.alarm_clock_time
+    - input_number.alarm_clock_hours
+    - input_number.alarm_clock_minutes
+    - input_boolean.alarm_clock_status

@@ -1,0 +1,14 @@
+homeassistant:
+  # Customization file
+  customize: !include customize.yaml
+
+light:
+  - platform: hue
+    host: 192.168.1.130
+
+sensor: !include sensors.yaml
+input_number: !include input_numbers.yaml
+input_boolean: !include input_booleans.yaml
+media_player: !include media_players.yaml
+group: !include groups.yaml
+automation: !include automations.yaml

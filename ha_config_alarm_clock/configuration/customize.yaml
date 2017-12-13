@@ -1,0 +1,16 @@
+input_number.alarm_clock_hours:
+  friendly_name: 'Heure'
+  icon: mdi:timer
+input_number.alarm_clock_minutes:
+  friendly_name: 'Minute'
+  icon: mdi:timer
+input_boolean.alarm_clock_status:
+  friendly_name: 'Status'
+  icon: mdi:calendar
+sensor.alarm_clock_hours:
+  hidden: true
+sensor.alarm_clock_minutes:
+  hidden: true
+sensor.alarm_clock_time:
+  friendly_name: 'Réveil'
+  icon: mdi:alarm

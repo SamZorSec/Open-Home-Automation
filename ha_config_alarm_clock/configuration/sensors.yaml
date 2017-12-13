@@ -1,0 +1,11 @@
+- platform: template
+  sensors:
+    alarm_clock_hours:
+      value_template: "{{ states('input_number.alarm_clock_hours') | round(0) }}"
+    alarm_clock_minutes:
+      value_template: "{{ states('input_number.alarm_clock_minutes') | round(0) }}"
+    alarm_clock_time:
+      value_template: "{% if states.sensor.alarm_clock_hours.state | length == 1 -%}0{%- endif -%}{{ states.sensor.alarm_clock_hours.state }}:{% if states.sensor.alarm_clock_minutes.state | length == 1 -%}0{%- endif -%}{{ states.sensor.alarm_clock_minutes.state }}"
+- platform: time_date
+  display_options:
+    - 'time'

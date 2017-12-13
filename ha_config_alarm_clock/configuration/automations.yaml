@@ -1,0 +1,43 @@
+- alias: 'Turn on the alarm clock'
+  trigger:
+    platform: template
+    value_template: '{{ states.sensor.time.state == states.sensor.alarm_clock_time.state }}'
+  condition:
+    condition: and
+    conditions:
+     - condition: state
+       entity_id: input_boolean.alarm_clock_status
+       state: 'on'
+     - condition: time
+       weekday:
+         - mon
+         - tue
+         - wed
+         - thu
+         - fri
+  action:
+    - service: media_player.turn_on
+      data:
+        entity_id: media_player.stereo
+    - service: media_player.volume_set
+      data:
+        entity_id: media_player.stereo
+        volume_level: 0.07
+    - service: media_player.select_source
+      data:
+        entity_id: media_player.stereo
+        source: dab
+    - service: light.turn_on
+      data:
+        entity_id: light.bedside
+        brightness: 255
+        transition: 900
+    - delay:
+        minutes: 15
+    - service: light.turn_on
+      data:
+        entity_id: light.ceiling
+        brightness: 255
+    - service: light.turn_off
+      data:
+        entity_id: light.bedside
