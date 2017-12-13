@@ -1,5 +1,5 @@
 # Configuration - Alarm Clock - Home Assistant
-A simple configuration example to create an alarm clock and trigger an automation, which turns on the light and switches on a stereo.
+A simple configuration example to create an alarm clock and trigger an automation, which turns on the light and switches on a stereo. This example was tested on [Home Assistant](https://home-assistant.io) 0.59.2 and uses the Philips [Hue](https://home-assistant.io/components/light.hue/) component and an [Onkyo](https://home-assistant.io/components/media_player.onkyo/) media player. 
 
 ## Configuration
 configuration.yaml :
