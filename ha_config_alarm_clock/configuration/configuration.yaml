@@ -2,9 +2,9 @@ homeassistant:
   # Customization file
   customize: !include customize.yaml
 
-light:
-  - platform: hue
-    host: 192.168.1.130
+hue:
+  bridges:
+   - host: 192.168.1.130
 
 sensor: !include sensors.yaml
 input_number: !include input_numbers.yaml
