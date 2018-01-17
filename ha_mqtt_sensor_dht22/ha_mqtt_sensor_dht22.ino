@@ -95,6 +95,7 @@ void publishData(float p_temperature, float p_humidity) {
   char data[200];
   root.printTo(data, root.measureLength() + 1);
   client.publish(MQTT_SENSOR_TOPIC, data, true);
+  yield();
 }
 
 // function called when a MQTT message arrived
