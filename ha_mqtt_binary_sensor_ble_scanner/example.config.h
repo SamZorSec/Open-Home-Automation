@@ -10,10 +10,10 @@ BLETrackedDevice BLETrackedDevices[NB_OF_BLE_TRACKED_DEVICES] = {
 #define MAX_NON_ADV_PERIOD    10000
 
 // Location of the BLE scanner
-#define LOCATION "Bedroom"
+#define LOCATION "bedroom"
 
 // Debug output
-#define DEBUG_SERIAL
+//#define DEBUG_SERIAL
 
 // Wi-Fi credentials
 #define WIFI_SSID     ""
@@ -42,5 +42,5 @@ BLETrackedDevice BLETrackedDevices[NB_OF_BLE_TRACKED_DEVICES] = {
 #define MQTT_PAYLOAD_ON   "ON"
 #define MQTT_PAYLOAD_OFF  "OFF"
 
-#define MQTT_PAYLOAD_AVAILABLE    "available"
-#define MQTT_PAYLOAD_UNAVAILABLE  "unavailable"
+#define MQTT_PAYLOAD_AVAILABLE    "online"
+#define MQTT_PAYLOAD_UNAVAILABLE  "offline"

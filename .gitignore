@@ -3,3 +3,5 @@
 ha_mqtt_multisensor/config.h
 ha_mqtt_multisensor/Configuration/binary_sensor.yaml
 ha_mqtt_multisensor/Configuration/sensor.yaml
+ha_mqtt_sensor_dht22/config.h
+ha_mqtt_binary_sensor_ble_scanner/config.h

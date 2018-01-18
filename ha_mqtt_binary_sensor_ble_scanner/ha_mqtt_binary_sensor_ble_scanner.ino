@@ -1,9 +1,19 @@
 /*
-   Based on Neil Kolban example for IDF: https://github.com/nkolban/esp32-snippets/blob/master/cpp_utils/tests/BLE%20Tests/SampleScan.cpp
-   Ported to Arduino ESP32 by Evandro Copercini
+  MQTT Binary Sensor - Bluetooth LE Device Tracker - Home Assistant
+  
+  Libraries:
+    - PubSubClient: https://github.com/knolleary/pubsubclient
+    - ESP32 BLE:    https://github.com/nkolban/ESP32_BLE_Arduino
 
+  Sources:
+    - https://github.com/nkolban/ESP32_BLE_Arduino/blob/master/examples/BLE_scan/BLE_scan.ino
+    - https://www.youtube.com/watch?v=KNoFdKgvskU
 
+  Samuel M. - v1.0 - 01.2018
+  If you like this example, please add a star! Thank you!
+  https://github.com/mertenats/open-home-automation
 */
+
 typedef struct {
   String  address;
   bool    isDiscovered;
@@ -29,6 +39,9 @@ BLEScan*      pBLEScan;
 WiFiClient    wifiClient;
 PubSubClient  mqttClient(wifiClient);
 
+///////////////////////////////////////////////////////////////////////////
+//   BLUETOOTH
+///////////////////////////////////////////////////////////////////////////
 class MyAdvertisedDeviceCallbacks:
   public BLEAdvertisedDeviceCallbacks {
     void onResult(BLEAdvertisedDevice advertisedDevice) {
@@ -105,7 +118,9 @@ void connectToMQTT() {
   }
 }
 
-
+///////////////////////////////////////////////////////////////////////////
+//   SETUP() & LOOP()
+///////////////////////////////////////////////////////////////////////////
 void setup() {
 #if defined(DEBUG_SERIAL)
   Serial.begin(115200);
