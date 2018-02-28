@@ -79,7 +79,6 @@ alarm_clock_minutes:
 input_booleans.yaml :
 ```yaml
 alarm_clock_status:
-  initial: on
 ```
 
 media_players.yaml :
