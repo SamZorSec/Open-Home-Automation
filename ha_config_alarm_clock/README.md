@@ -1,5 +1,5 @@
 # Configuration - Alarm Clock - Home Assistant
-A simple configuration example to create an alarm clock and trigger an automation, which turns on the light and switches on a stereo. This example was tested on [Home Assistant](https://home-assistant.io) 0.59.2 and uses the Philips [Hue](https://home-assistant.io/components/light.hue/) component and an [Onkyo](https://home-assistant.io/components/media_player.onkyo/) media player. 
+A simple configuration example to create an alarm clock and trigger an automation, which turns on the light and switches on a stereo. This example was tested on [Home Assistant](https://home-assistant.io) 0.64.1 and uses the Philips [Hue](https://home-assistant.io/components/light.hue/) component and an [Onkyo](https://home-assistant.io/components/media_player.onkyo/) media player.
 
 ## Configuration
 configuration.yaml :
@@ -8,9 +8,16 @@ homeassistant:
   # Customization file
   customize: !include customize.yaml
 
-light:
-  - platform: hue
-    host: 192.168.1.130
+hue:
+  bridges:
+   - host: 192.168.1.130
+
+recorder:
+  include:
+    entities:
+      - input_number.alarm_clock_hours
+      - input_number.alarm_clock_minutes
+      - input_boolean.alarm_clock_status
 
 sensor: !include sensors.yaml
 input_number: !include input_numbers.yaml
@@ -29,14 +36,14 @@ input_number.alarm_clock_minutes:
   friendly_name: 'Minute'
   icon: mdi:timer
 input_boolean.alarm_clock_status:
-  friendly_name: 'Status'
+  friendly_name: 'Etat'
   icon: mdi:calendar
 sensor.alarm_clock_hours:
   hidden: true
 sensor.alarm_clock_minutes:
   hidden: true
 sensor.alarm_clock_time:
-  friendly_name: 'Réveil'
+  friendly_name: 'Heure du réveil'
   icon: mdi:alarm
 ```
 
@@ -58,15 +65,15 @@ sensors.yaml :
 input_numbers.yaml :
 ```yaml
 alarm_clock_hours:
-  initial: 6
   min: 0
   max: 23
   step: 1
+  mode: slider
 alarm_clock_minutes:
-  initial: 0
   min: 0
   max: 55
   step: 5
+  mode: slider
 ```
 
 input_booleans.yaml :
