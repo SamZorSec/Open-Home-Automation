@@ -6,7 +6,7 @@ configuration.yaml :
 ```yaml
 light:
   platform: mqtt
-  name: Office light'
+  name: 'Office light'
   state_topic: 'office/light1/status'
   command_topic: 'office/light1/switch'
   optimistic: false
