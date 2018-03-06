@@ -187,7 +187,7 @@ void callback(char* p_topic, byte* p_payload, unsigned int p_length) {
 void reconnect() {
   // Loop until we're reconnected
   while (!client.connected()) {
-    Serial.print("INFO: Attempting MQTT connection...");
+    Serial.println("INFO: Attempting MQTT connection...");
     // Attempt to connect
     if (client.connect(MQTT_CLIENT_ID, MQTT_USER, MQTT_PASSWORD)) {
       Serial.println("INFO: connected");
