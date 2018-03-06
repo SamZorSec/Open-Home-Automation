@@ -56,7 +56,7 @@ Hardware:
 - 1 Signal amplifier (HX711)
 - 1 Photo-resistor
 - 1 iBeacon
-- 1 iOS device 
+- 1 iOS device
 
 Software:
 
@@ -330,9 +330,12 @@ config.json:
     {
       "platform": "HomeAssistant",
       "name": "HomeAssistant",
-      "host": "https://[Redacted]",
-      "password": "[Redacted]",
-      "supported_types": ["fan", "garage_door", "input_boolean", "light", "lock", "media_player", "rollershutter", "scene", "switch"]
+      "host": "http://127.0.0.1:8123",
+      "password": "yourapipassword",
+      "supported_types": ["automation", "binary_sensor", "climate", "cover", "device_tracker", "fan", "group", "input_boolean", "light", "lock", "media_player", "remote", "scene", "script", "sensor", "switch", "vacuum"],
+      "default_visibility": "hidden",
+      "logging": true,
+      "verify_ssl": true
     }
   ]
 }
@@ -372,25 +375,27 @@ notify:
   api_key: [Redacted]
   chat_id: [Redacted]
 ```
-### Forcast.io
-To use the data from Forecast.io a [account](http://forecast.io) is necessary to retrieve a `api_key`. 
+
+### ~~Forcast.io~~ Dark Sky
+To use the data from ~~Forecast.io~~ darksky.net a [account](https://darksky.net/dev/register) is necessary to retrieve a `api_key`.
 
 Configuration for Home Assistant:
 
 ```yaml
 sensor:
-  platform: forecast
-  api_key: [Redacted]
-  monitored_conditions:
-    - precip_probability
-    - temperature
-    - wind_speed
-    - cloud_cover
-    - humidity
-    - pressure
-    - temperature_max
-    - precip_intensity_max
+  - platform: darksky
+    api_key: [Redacted]
+    monitored_conditions:
+      - precip_probability
+      - temperature
+      - wind_speed
+      - cloud_cover
+      - humidity
+      - pressure
+      - temperature_max
+      - precip_intensity_max
 ```
+
 ### Owntracks
 Configuration for Home Assistant:
 
@@ -438,7 +443,7 @@ LED on the left:
 
 - Shortest leg to GND
 - Longest leg to D1, with a 220 Ohms resistor
- 
+
 LED on the right:
 
 - Shortest leg to GND
@@ -449,7 +454,7 @@ PIR sensor:
 - Red cable to VIN
 - Yellow cable to D3
 - Black cable to GND
-   
+
 ![Schematic of the entrance module](sketches/Entrance/Schematic.png)
 #### Configuration for Home Assistant
 
@@ -536,10 +541,10 @@ LED on the right:
 
 Load cell to HX711:
 
-- Red cable to E+ 
-- Black cable to E- 
-- White cable to A- 
-- Green cable to A+ 
+- Red cable to E+
+- Black cable to E-
+- White cable to A-
+- Green cable to A+
 
 HX711:
 
