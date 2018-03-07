@@ -13,8 +13,8 @@
 -  platform: template
    sensors:
      alarm_clock_hour:
-       value_template: '{{ states("input_slider.alarm_clock_hour") | round(0) }}'
+       value_template: '{{ states("input_number.alarm_clock_hour") | round(0) }}'
      alarm_clock_minute:
-       value_template: '{{ states("input_slider.alarm_clock_minute") | round(0) }}'
+       value_template: '{{ states("input_number.alarm_clock_minute") | round(0) }}'
      alarm_clock_time:
        value_template: '{{ states("sensor.alarm_clock_hour") }}:{% if states("sensor.alarm_clock_minute")|length == 1 %}0{% endif %}{{ states("sensor.alarm_clock_minute") }}'
