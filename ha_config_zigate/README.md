@@ -31,7 +31,7 @@ switches.yaml :
 ```yaml
 - platform: zigate
   name: 'Door'
-  address: e49d01
+  address: XXXX01
   default_state: 'state'
   inverted: 'yes'
 ```
@@ -42,15 +42,16 @@ lights.yaml :
 ```yaml
 - platform: zigate
   name: 'Bedside'
-  address: 64880b
+  address: XXXX0b
   light_type: 'white'
   default_state: 'event'
 - platform: zigate
   name: 'Ceiling'
-  address: 1e4c0b
+  address: XXXX0b
   light_type: 'white'
   default_state: 'event'
 ```
+**Note** : Philips uses the `0b`cluster for their bulbs!
 
 Configuration for the Xiaomi Aqara temperature/humidity/pressure sensor and switch :
 
