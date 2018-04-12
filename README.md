@@ -73,6 +73,7 @@ This section contains a few configuration examples dedicated to Home Assistant.
 |-----------------------------------------------|-----------------------------------------------------------------------|
 | [Alarm Clock](/ha_config_alarm_clock)         | An example describing how to create an **alarm clock** with the components provided by HA |
 | [openhome](/openhome)                         | A school project based on Home Assistant and using only **open source** HW and SW |
+| [Zigate & ZigBee devices](/ha_config_zigate)  | An example describing how to add and control **ZigBee** devices paired to a **Zigate** |
 
 [![OpenHome with Home Assistant and MQTT](openhome/images/Youtube.png)](https://www.youtube.com/watch?v=Vh-vzFPCF2U "OpenHome with Home Assistant and MQTT")
 
