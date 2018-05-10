@@ -26,13 +26,26 @@
 #endif
 
 // Temperature and humidity sensor (DHT22)
-#define DHT22_SENSOR                  D2
-#if defined(DHT22_SENSOR)
-#define DHT22_TEMPERATURE_SENSOR_NAME   "temperature"
-#define DHT22_HUMIDITY_SENSOR_NAME      "humidity"
-#define DHT22_TEMPERATURE_OFFSET_VALUE  0.2   // [°C]
-#define DHT22_HUMIDITY_OFFSET_VALUE     0.5   // [%]
-#define DHT22_MEASURE_INTERVAL          30000 // [ms]
+//#define DHT_SENSOR
+#if defined(DHT_SENSOR)
+#define DHT_TEMPERATURE_SENSOR_NAME     "temperature"
+#define DHT_HUMIDITY_SENSOR_NAME        "humidity"
+#define DHT_TEMPERATURE_OFFSET_VALUE    0.2   // [°C]
+#define DHT_HUMIDITY_OFFSET_VALUE       0.5   // [%]
+#define DHT_MEASURE_INTERVAL            30000 // [ms]
+#define DHT_PIN                         D2
+#endif
+
+// Temperature and humidity sensor (Sensirion SHT3X)
+#define SHT_SENSOR
+#if defined(SHT_SENSOR)
+#define SHT_TEMPERATURE_SENSOR_NAME   "temperature"
+#define SHT_HUMIDITY_SENSOR_NAME      "humidity"
+#define SHT_TEMPERATURE_OFFSET_VALUE  0.2   // [°C]
+#define SHT_HUMIDITY_OFFSET_VALUE     0.5   // [%]
+#define SHT_MEASURE_INTERVAL          30000 // [ms]
+#define SHT_SDA_PIN                   D3
+#define SHT_SCL_PIN                   D2
 #endif
 
 // Button

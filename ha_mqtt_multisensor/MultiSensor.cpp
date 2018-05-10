@@ -1,10 +1,19 @@
 #include "Arduino.h"
 #include "MultiSensor.h"
 
-#if defined(DHT22_SENSOR)
+#if defined(DHT_SENSOR)
+// https://github.com/adafruit/Adafruit_Sensor
+// https://github.com/adafruit/DHT-sensor-library
 #include "DHT.h"
 #define DHTTYPE DHT22
-DHT dht(DHT22_SENSOR, DHTTYPE);
+DHT dht(DHT_PIN, DHTTYPE);
+#endif
+
+#if defined(SHT_SENSOR)
+// https://github.com/Sensirion/arduino-sht
+#include <Wire.h>
+#include "SHTSensor.h"
+SHTSensor sht;
 #endif
 
 volatile uint8_t evt = NO_SENSOR_EVT;    
@@ -56,11 +65,18 @@ void MultiSensor::init(void) {
   pinMode(LDR_SENSOR, INPUT);
   this->_ldrValue = analogRead(LDR_SENSOR);
 #endif
-#if defined(DHT22_SENSOR)
+#if defined(DHT_SENSOR)
   dht.begin();
   delay(2000);
-  this->_readTemperature();
-  this->_readHumidity();
+  this->_readDHTTemperature();
+  this->_readDHTHumidity();
+#endif
+#if defined(SHT_SENSOR)
+  Wire.begin(SHT_SCL_PIN, SHT_SDA_PIN);
+  sht.init();
+  sht.setAccuracy(SHTSensor::SHT_ACCURACY_MEDIUM); 
+  this->_readSHTTemperature();
+  this->_readSHTHumidity();
 #endif
 #if defined(BUTTON_SENSOR)
   pinMode(BUTTON_SENSOR, INPUT);
@@ -103,13 +119,23 @@ void MultiSensor::handleEvt(void) {
       evt = NO_SENSOR_EVT;
       break;
 #endif
-#if defined(DHT22_SENSOR)
-    case DHT22_TEMPERATURE_SENSOR_EVT:
-      this->_callback(DHT22_TEMPERATURE_SENSOR_EVT);
+#if defined(DHT_SENSOR)
+    case DHT_TEMPERATURE_SENSOR_EVT:
+      this->_callback(DHT_TEMPERATURE_SENSOR_EVT);
       evt = NO_SENSOR_EVT;
       break;
-    case DHT22_HUMIDITY_SENSOR_EVT:
-      this->_callback(DHT22_HUMIDITY_SENSOR_EVT);
+    case DHT_HUMIDITY_SENSOR_EVT:
+      this->_callback(DHT_HUMIDITY_SENSOR_EVT);
+      evt = NO_SENSOR_EVT;
+      break;
+#endif
+#if defined(SHT_SENSOR)
+    case SHT_TEMPERATURE_SENSOR_EVT:
+      this->_callback(SHT_TEMPERATURE_SENSOR_EVT);
+      evt = NO_SENSOR_EVT;
+      break;
+    case SHT_HUMIDITY_SENSOR_EVT:
+      this->_callback(SHT_HUMIDITY_SENSOR_EVT);
       evt = NO_SENSOR_EVT;
       break;
 #endif
@@ -132,25 +158,48 @@ void MultiSensor::loop(void) {
   }
 #endif
 
-#if defined(DHT22_SENSOR)
-  static unsigned long lastDht22TemperatureSensorMeasure = 0;
-  if (lastDht22TemperatureSensorMeasure + DHT22_MEASURE_INTERVAL <= millis()) {
-    lastDht22TemperatureSensorMeasure = millis();
-    float currentDht22Temperature = this->_readTemperature();
-    if (currentDht22Temperature <= this->_temperature - DHT22_TEMPERATURE_OFFSET_VALUE || currentDht22Temperature >= this->_temperature + DHT22_TEMPERATURE_OFFSET_VALUE) {
-      this->_temperature = currentDht22Temperature;
-      evt = DHT22_TEMPERATURE_SENSOR_EVT;
+#if defined(DHT_SENSOR)
+  static unsigned long lastDHTTemperatureSensorMeasure = 0;
+  if (lastDHTTemperatureSensorMeasure + DHT_MEASURE_INTERVAL <= millis()) {
+    lastDHTTemperatureSensorMeasure = millis();
+    float currentDHTTemperature = this->_readDHTTemperature();
+    if (currentDHTTemperature <= this->_DHTTemperature - DHT_TEMPERATURE_OFFSET_VALUE || currentDHTTemperature >= this->_DHTTemperature + DHT_TEMPERATURE_OFFSET_VALUE) {
+      this->_DHTTemperature = currentDHTTemperature;
+      evt = DHT_TEMPERATURE_SENSOR_EVT;
       return;
     }
   }
   
-  static unsigned long lastDht22HumiditySensorMeasure = 0;
-  if (lastDht22HumiditySensorMeasure + DHT22_MEASURE_INTERVAL <= millis()) {
-    lastDht22HumiditySensorMeasure = millis();
-    float currentDht22Humidity = this->_readHumidity();
-    if (currentDht22Humidity <= this->_humidity - DHT22_HUMIDITY_OFFSET_VALUE || currentDht22Humidity >= this->_humidity + DHT22_HUMIDITY_OFFSET_VALUE) {
-      this->_humidity = currentDht22Humidity;
-      evt = DHT22_HUMIDITY_SENSOR_EVT;
+  static unsigned long lastDHTHumiditySensorMeasure = 0;
+  if (lastDHTHumiditySensorMeasure + DHT_MEASURE_INTERVAL <= millis()) {
+    lastDHTHumiditySensorMeasure = millis();
+    float currentDHTHumidity = this->_readDHTHumidity();
+    if (currentDHTHumidity <= this->_DHTHumidity - DHT_HUMIDITY_OFFSET_VALUE || currentDHTHumidity >= this->_DHTHumidity + DHT_HUMIDITY_OFFSET_VALUE) {
+      this->_DHTHumidity = currentDHTHumidity;
+      evt = DHT_HUMIDITY_SENSOR_EVT;
+      return;
+    }
+  }
+#endif
+#if defined(SHT_SENSOR)
+  static unsigned long lastSHTTemperatureSensorMeasure = 0;
+  if (lastSHTTemperatureSensorMeasure + SHT_MEASURE_INTERVAL <= millis()) {
+    lastSHTTemperatureSensorMeasure = millis();
+    float currentSHTTemperature = this->_readSHTTemperature();
+    if (currentSHTTemperature <= this->_SHTTemperature - SHT_TEMPERATURE_OFFSET_VALUE || currentSHTTemperature >= this->_SHTTemperature + SHT_TEMPERATURE_OFFSET_VALUE) {
+      this->_SHTTemperature = currentSHTTemperature;
+      evt = SHT_TEMPERATURE_SENSOR_EVT;
+      return;
+    }
+  }
+  
+  static unsigned long lastSHTHumiditySensorMeasure = 0;
+  if (lastSHTHumiditySensorMeasure + SHT_MEASURE_INTERVAL <= millis()) {
+    lastSHTHumiditySensorMeasure = millis();
+    float currentSHTHumidity = this->_readSHTHumidity();
+    if (currentSHTHumidity <= this->_SHTHumidity - SHT_HUMIDITY_OFFSET_VALUE || currentSHTHumidity >= this->_SHTHumidity + SHT_HUMIDITY_OFFSET_VALUE) {
+      this->_SHTHumidity = currentSHTHumidity;
+      evt = SHT_HUMIDITY_SENSOR_EVT;
       return;
     }
   }
@@ -193,41 +242,64 @@ uint16_t MultiSensor::getLux(void) {
 }
 #endif
 
-#if defined(DHT22_SENSOR)
-float MultiSensor::_readTemperature(void) {
+
+#if defined(DHT_SENSOR)
+float MultiSensor::_readDHTTemperature(void) {
   float temperature = dht.readTemperature();
-//  while (isnan(temperature)) {
-//    delay(1000);
-//    temperature = dht.readTemperature();
-//    DEBUG_PRINTLN(F("ERROR: Error while reading the current temperature"));
-//  }
+
   if (isnan(temperature)) {
-    return this->_temperature;
+    return this->_DHTTemperature;
   }
   return temperature;
 }
 
-float MultiSensor::_readHumidity(void) {
+float MultiSensor::_readDHTHumidity(void) {
   float humidity = dht.readHumidity();
-//  while (isnan(humidity)) {
-//    delay(1000);
-//    humidity = dht.readHumidity();
-//    DEBUG_PRINTLN(F("ERROR: Error while reading the current humidity"));
-//  }
+
   if (isnan(humidity)) {
-    return this->_humidity;
+    return this->_DHTHumidity;
   }
   return humidity;
 }
 
-float MultiSensor::getTemperature(void) {
-  return this->_temperature;
+float MultiSensor::getDHTTemperature(void) {
+  return this->_DHTTemperature;
 }
 
-float MultiSensor::getHumidity(void) {
-  return this->_humidity;
+float MultiSensor::getDHTHumidity(void) {
+  return this->_DHTHumidity;
 }
 #endif
+
+
+#if defined(SHT_SENSOR)
+float MultiSensor::_readSHTTemperature(void) {
+  float temperature = sht.getTemperature();
+  
+  if (isnan(temperature)) {
+    return this->_SHTTemperature;
+  }
+  return temperature;
+}
+
+float MultiSensor::_readSHTHumidity(void) {
+  float humidity = sht.getHumidity();
+
+  if (isnan(humidity)) {
+    return this->_SHTHumidity;
+  }
+  return humidity;
+}
+
+float MultiSensor::getSHTTemperature(void) {
+  return this->_SHTTemperature;
+}
+
+float MultiSensor::getSHTHumidity(void) {
+  return this->_SHTHumidity;
+}
+#endif
+
 
 #if defined(BUTTON_SENSOR)
 bool MultiSensor::getButtonState(void) {

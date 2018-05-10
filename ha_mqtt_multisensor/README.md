@@ -2,12 +2,12 @@
 A full example describing how to monitor your environment with an ESP8266, the MQTT protocol and Home Assistant.
 
 ## Features
-- Temperature (DHT22)
-- Humidity (DHT22)
+- Temperature (DHT22, SHT3X)
+- Humidity (DHT22, SHT3X)
 - Luminosity (Photoresistor)
 - Motion (AM312)
-- Door/Window state
-- Button ON/OFF
+- Door/Window state ON/OFF
+- Button state ON/OFF
 
 ## Schematic
 ### DHT22 sensor

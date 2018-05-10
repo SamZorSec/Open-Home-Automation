@@ -14,12 +14,16 @@
 #if defined(LDR_SENSOR)
 #define LDR_SENSOR_EVT                3
 #endif
-#if defined(DHT22_SENSOR)
-#define DHT22_TEMPERATURE_SENSOR_EVT  4
-#define DHT22_HUMIDITY_SENSOR_EVT     5
+#if defined(DHT_SENSOR)
+#define DHT_TEMPERATURE_SENSOR_EVT    4
+#define DHT_HUMIDITY_SENSOR_EVT       5
+#endif
+#if defined(SHT_SENSOR)
+#define SHT_TEMPERATURE_SENSOR_EVT    6
+#define SHT_HUMIDITY_SENSOR_EVT       7
 #endif
 #if defined(BUTTON_SENSOR)
-#define BUTTON_SENSOR_EVT             6
+#define BUTTON_SENSOR_EVT             8
 #endif
 
 class MultiSensor {
@@ -38,9 +42,13 @@ class MultiSensor {
 #if defined(LDR_SENSOR)
     uint16_t getLux(void);
 #endif
-#if defined(DHT22_SENSOR)
-    float getTemperature(void);
-    float getHumidity(void);
+#if defined(DHT_SENSOR)
+    float getDHTTemperature(void);
+    float getDHTHumidity(void);
+#endif
+#if defined(SHT_SENSOR)
+    float getSHTTemperature(void);
+    float getSHTHumidity(void);
 #endif
 #if defined(BUTTON_SENSOR)
     bool getButtonState(void);
@@ -58,11 +66,17 @@ class MultiSensor {
 #if defined(LDR_SENSOR)
     uint16_t _ldrValue = 0;
 #endif
-#if defined(DHT22_SENSOR)
-    float _readTemperature(void);
-    float _readHumidity(void);
-    float _temperature = 0;
-    float _humidity = 0;
+#if defined(DHT_SENSOR)
+    float _readDHTTemperature(void);
+    float _readDHTHumidity(void);
+    float _DHTTemperature = 0;
+    float _DHTHumidity = 0;
+#endif
+#if defined(SHT_SENSOR)
+    float _readSHTTemperature(void);
+    float _readSHTHumidity(void);
+    float _SHTTemperature = 0;
+    float _SHTHumidity = 0;
 #endif
 #if defined(BUTTON_SENSOR)
     bool _buttonState = false;
