@@ -13,16 +13,18 @@
 #define PIR_SENSOR_NAME                 "motion"
 #endif
 
-// Photoresistor sensor
-#define LDR_SENSOR                      A0
+// Photoresistor / TEMT6000 sensor
+// Do not add a 10 kOhms resistor if you're using the TEMT6000
+// sensor (already present on the PCB)
+#define LDR_SENSOR
 #if defined(LDR_SENSOR)
 #define LDR_SENSOR_NAME                 "lux"
 #define LDR_OFFSET_VALUE                25
-#define LDR_MEASURE_INTERVAL            15000 // [ms]
-#define LDR_REFERENCE_VOLTAGE           3.3   // [v]
-#define LDR_ADC_PRECISION               1024  // 10 bits
-#define LDR_VOLTAGE_PER_ADC_PRECISION   LDR_REFERENCE_VOLTAGE / LDR_ADC_PRECISION
-#define LDR_RESISTOR_VALUE              10.0  // [kOhms]
+#define LDR_MEASURE_INTERVAL            15000   // [ms]
+#define REFERENCE_VOLTAGE               3.3     // [v]
+#define ADC_PRECISION                   1024.0  // 10 bits
+#define LDR_RESISTOR_VALUE              10000.0  // [Ohms]
+#define LDR_PIN                         A0
 #endif
 
 // Temperature and humidity sensor (DHT22)

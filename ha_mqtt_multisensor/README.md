@@ -4,7 +4,7 @@ A full example describing how to monitor your environment with an ESP8266, the M
 ## Features
 - Temperature (DHT22, SHT3X)
 - Humidity (DHT22, SHT3X)
-- Luminosity (Photoresistor)
+- Luminosity (Photoresistor, TEMT6000)
 - Motion (AM312)
 - Door/Window state ON/OFF
 - Button state ON/OFF
@@ -17,11 +17,26 @@ Temperature and Humidity sensor. Schematic available [here](https://github.com/m
 - DHT22 leg 2 - D2 - Resistor 4.7K Ohms - GND
 - DHT22 leg 4 - GND
 
+### SHT3X sensor
+Temperature and Humidity sensor.
+
+- SHT3X VCC - VCC
+- SHT3X GND - GND
+- SHT3X SCL - D2
+- SHT3X SDA - D3
+
 ### Photoresistor
 Luminosity sensor. Schematic available [here](https://github.com/mertenats/Open-Home-Automation/tree/master/ha_mqtt_sensor_photocell).
 
 - Photocell leg 1 - VCC
 - Photocell leg 2 - A0 - Resistor 10K Ohms - GND
+
+### TEMT6000
+Luminosity sensor.
+
+- TEMT6000 VCC - VCC
+- TEMT6000 GND - GND
+- TEMT6000 OUT - A0
 
 ### AM312 sensor
 Motion sensor. Schematic available [here](https://github.com/mertenats/Open-Home-Automation/tree/master/ha_mqtt_binary_sensor_pir).

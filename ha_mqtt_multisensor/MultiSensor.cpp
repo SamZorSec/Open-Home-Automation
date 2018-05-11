@@ -62,8 +62,8 @@ void MultiSensor::init(void) {
   this->_pirState = digitalRead(PIR_SENSOR);
 #endif
 #if defined(LDR_SENSOR)
-  pinMode(LDR_SENSOR, INPUT);
-  this->_ldrValue = analogRead(LDR_SENSOR);
+  pinMode(LDR_PIN, INPUT);
+  this->_ldrValue = analogRead(LDR_PIN);
 #endif
 #if defined(DHT_SENSOR)
   dht.begin();
@@ -149,7 +149,7 @@ void MultiSensor::loop(void) {
   static unsigned long lastLdrSensorMeasure = 0;
   if (lastLdrSensorMeasure + LDR_MEASURE_INTERVAL <= millis()) {
     lastLdrSensorMeasure = millis();
-    uint16_t currentLdrValue = analogRead(LDR_SENSOR);
+    uint16_t currentLdrValue = analogRead(LDR_PIN);
     if (currentLdrValue <= this->_ldrValue - LDR_OFFSET_VALUE || currentLdrValue >= this->_ldrValue + LDR_OFFSET_VALUE) {
       this->_ldrValue = currentLdrValue;
       evt = LDR_SENSOR_EVT;
@@ -237,8 +237,11 @@ bool MultiSensor::getPirState(void) {
 #if defined(LDR_SENSOR)
 uint16_t MultiSensor::getLux(void) {
   // http://forum.arduino.cc/index.php?topic=37555.0
-  float voltage = this->_ldrValue * LDR_VOLTAGE_PER_ADC_PRECISION;   
-  return 500 / (LDR_RESISTOR_VALUE * ((LDR_REFERENCE_VOLTAGE - voltage) / voltage));
+  // https://forum.arduino.cc/index.php?topic=185158.0
+  float volts = this->_ldrValue * REFERENCE_VOLTAGE / ADC_PRECISION;
+  float amps = volts / LDR_RESISTOR_VALUE;
+  float lux = amps * 1000000 * 2.0;
+  return uint16_t(lux);
 }
 #endif
 

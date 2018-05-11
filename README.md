@@ -62,7 +62,7 @@ Lights, sensors, switches and more can be built on top of MQTT. This section con
 | [Sensor](/ha_mqtt_sensor_photocell)           | A simple example to measure the **brightness** (photocell)|
 | [Binary Sensor](/ha_mqtt_binary_sensor_pir)   | A simple example to detect **motions** (PIR motion sensor)|
 | [Binary Sensor](/ha_mqtt_binary_sensor_door)  | A simple example to monitor the **state** of a **window/door** |
-| [Binary Sensor](/ha_mqtt_multisensor)         | A full example describing how to monitor your **environment**|
+| [Binary Sensor](/ha_mqtt_multisensor)         | A full example describing how to monitor your **environment** with different sensors (SHT3X, DHT22, TEMT6000, etc.)|
 | [Binary Sensor](/ha_mqtt_binary_sensor_ble_scanner)| An example describing how to trigger an action when a specific **BLE device** is detected (ESP32)|
 | [Binary Sensor](/ha_mqtt_binary_sensor_nfc_scanner)| An example describing how to trigger an action when a specific **NFC tag** is detected|
 
