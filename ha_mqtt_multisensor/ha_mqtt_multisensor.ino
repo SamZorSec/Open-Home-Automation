@@ -134,8 +134,8 @@ volatile unsigned long lastMQTTConnection = 0;
 char MQTT_CLIENT_ID[7] = {0};
 char MQTT_PAYLOAD[8] = {0};
 char MQTT_AVAILABILITY_TOPIC[sizeof(MQTT_CLIENT_ID) + sizeof(MQTT_AVAILABILITY_TOPIC_TEMPLATE) - 2] = {0};
-#if defined(PIR_SENSOR)
-char MQTT_PIR_SENSOR_TOPIC[sizeof(MQTT_CLIENT_ID) + sizeof(MQTT_SENSOR_TOPIC_TEMPLATE) + sizeof(PIR_SENSOR_NAME) - 4] = {0};
+#if defined(MOTION_SENSOR)
+char MQTT_MOTION_SENSOR_TOPIC[sizeof(MQTT_CLIENT_ID) + sizeof(MQTT_SENSOR_TOPIC_TEMPLATE) + sizeof(MOTION_SENSOR_NAME) - 4] = {0};
 #endif
 #if defined(DOOR_SENSOR)
 char MQTT_DOOR_SENSOR_TOPIC[sizeof(MQTT_CLIENT_ID) + sizeof(MQTT_SENSOR_TOPIC_TEMPLATE) + sizeof(DOOR_SENSOR_NAME) - 4] = {0};
@@ -189,11 +189,11 @@ void connectToMQTT() {
           publishToMQTT(MQTT_DOOR_SENSOR_TOPIC, MQTT_PAYLOAD_OFF);
         }
 #endif
-#if defined(PIR_SENSOR)
-        if (ms.getPirState()) {
-          publishToMQTT(MQTT_PIR_SENSOR_TOPIC, MQTT_PAYLOAD_ON);
+#if defined(MOTION_SENSOR)
+        if (ms.getMotionState()) {
+          publishToMQTT(MQTT_MOTION_SENSOR_TOPIC, MQTT_PAYLOAD_ON);
         } else {
-          publishToMQTT(MQTT_PIR_SENSOR_TOPIC, MQTT_PAYLOAD_OFF);
+          publishToMQTT(MQTT_MOTION_SENSOR_TOPIC, MQTT_PAYLOAD_OFF);
         }
 #endif
 #if defined(LDR_SENSOR)
@@ -248,12 +248,12 @@ void onMultiSensorEvent(uint8_t p_evt) {
       }
       break;
 #endif
-#if defined(PIR_SENSOR)
-    case PIR_SENSOR_EVT:
-      if (ms.getPirState()) {
-        publishToMQTT(MQTT_PIR_SENSOR_TOPIC, MQTT_PAYLOAD_ON);
+#if defined(MOTION_SENSOR)
+    case MOTION_SENSOR_EVT:
+      if (ms.getMotionState()) {
+        publishToMQTT(MQTT_MOTION_SENSOR_TOPIC, MQTT_PAYLOAD_ON);
       } else {
-        publishToMQTT(MQTT_PIR_SENSOR_TOPIC, MQTT_PAYLOAD_OFF);
+        publishToMQTT(MQTT_MOTION_SENSOR_TOPIC, MQTT_PAYLOAD_OFF);
       }
       break;
 #endif
@@ -315,10 +315,10 @@ void setup() {
   DEBUG_PRINT(F("INFO: MQTT availability topic: "));
   DEBUG_PRINTLN(MQTT_AVAILABILITY_TOPIC);
   
-#if defined(PIR_SENSOR)
-  sprintf(MQTT_PIR_SENSOR_TOPIC, MQTT_SENSOR_TOPIC_TEMPLATE, MQTT_CLIENT_ID, PIR_SENSOR_NAME);
+#if defined(MOTION_SENSOR)
+  sprintf(MQTT_MOTION_SENSOR_TOPIC, MQTT_SENSOR_TOPIC_TEMPLATE, MQTT_CLIENT_ID, MOTION_SENSOR_NAME);
   DEBUG_PRINT(F("INFO: MQTT motion sensor topic: "));
-  DEBUG_PRINTLN(MQTT_PIR_SENSOR_TOPIC);
+  DEBUG_PRINTLN(MQTT_MOTION_SENSOR_TOPIC);
 #endif
 #if defined(DOOR_SENSOR)
   sprintf(MQTT_DOOR_SENSOR_TOPIC, MQTT_SENSOR_TOPIC_TEMPLATE, MQTT_CLIENT_ID, DOOR_SENSOR_NAME);

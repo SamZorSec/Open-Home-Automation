@@ -8,14 +8,20 @@
 #endif
 
 // Motion sensor
-#define PIR_SENSOR                      D7
-#if defined(PIR_SENSOR)
-#define PIR_SENSOR_NAME                 "motion"
+//   - AM312
+//   - RCWL 0516
+#define MOTION_SENSOR
+#if defined(MOTION_SENSOR)
+#define MOTION_SENSOR_NAME                 "motion"
+#define MOTION_SENSOR_PIN                  D7
 #endif
 
-// Photoresistor / TEMT6000 sensor
+// Ambient light sensor
+//   - Photoresistor
+//   - TEMT6000 sensor
 // Do not add a 10 kOhms resistor if you're using the TEMT6000
 // sensor (already present on the PCB)
+//#define LDR_SENSOR   
 #define LDR_SENSOR
 #if defined(LDR_SENSOR)
 #define LDR_SENSOR_NAME                 "lux"

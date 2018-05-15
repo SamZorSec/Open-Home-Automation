@@ -28,9 +28,9 @@ void doorSensorISR(void) {
 }
 #endif
 
-#if defined(PIR_SENSOR)
-void pirSensorISR(void) {
-  evt = PIR_SENSOR_EVT;
+#if defined(MOTION_SENSOR)
+void motionSensorISR(void) {
+  evt = MOTION_SENSOR_EVT;
 }
 #endif
 
@@ -56,10 +56,10 @@ void MultiSensor::init(void) {
   attachInterrupt(digitalPinToInterrupt(DOOR_SENSOR), doorSensorISR, CHANGE);
   this->_doorState = this->_readDoorState();
 #endif
-#if defined(PIR_SENSOR)
-  pinMode(PIR_SENSOR, INPUT_PULLUP);
-  attachInterrupt(digitalPinToInterrupt(PIR_SENSOR), pirSensorISR, CHANGE);
-  this->_pirState = digitalRead(PIR_SENSOR);
+#if defined(MOTION_SENSOR)
+  pinMode(MOTION_SENSOR_PIN, INPUT_PULLUP);
+  attachInterrupt(digitalPinToInterrupt(MOTION_SENSOR_PIN), motionSensorISR, CHANGE);
+  this->_motionState = digitalRead(MOTION_SENSOR_PIN);
 #endif
 #if defined(LDR_SENSOR)
   pinMode(LDR_PIN, INPUT);
@@ -97,11 +97,11 @@ void MultiSensor::handleEvt(void) {
       evt = NO_SENSOR_EVT;
       break;
 #endif
-#if defined(PIR_SENSOR)
-    case PIR_SENSOR_EVT:
-      if (digitalRead(PIR_SENSOR) != this->_pirState) {
-        this->_pirState = !this->_pirState;
-        this->_callback(PIR_SENSOR_EVT);
+#if defined(MOTION_SENSOR)
+    case MOTION_SENSOR_EVT:
+      if (digitalRead(MOTION_SENSOR_PIN) != this->_motionState) {
+        this->_motionState = !this->_motionState;
+        this->_callback(MOTION_SENSOR_EVT);
       }
       evt = NO_SENSOR_EVT;
       break;
@@ -228,9 +228,9 @@ bool MultiSensor::getDoorState(void) {
 }
 #endif
 
-#if defined(PIR_SENSOR)
-bool MultiSensor::getPirState(void) {
-  return this->_pirState;
+#if defined(MOTION_SENSOR)
+bool MultiSensor::getMotionState(void) {
+  return this->_motionState;
 }
 #endif
 

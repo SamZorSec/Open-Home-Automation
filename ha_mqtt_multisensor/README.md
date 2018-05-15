@@ -5,7 +5,7 @@ A full example describing how to monitor your environment with an ESP8266, the M
 - Temperature (DHT22, SHT3X)
 - Humidity (DHT22, SHT3X)
 - Luminosity (Photoresistor, TEMT6000)
-- Motion (AM312)
+- Motion (AM312, RCWL 0516)
 - Door/Window state ON/OFF
 - Button state ON/OFF
 
@@ -45,6 +45,13 @@ Motion sensor. Schematic available [here](https://github.com/mertenats/Open-Home
 - PIR leg 2 - D7
 - PIR leg 3 - GND
 
+### RCWL 0516 sensor
+Motion sensor.
+
+- RCWL 0516 3v3 - VCC
+- RCWL 0516 GND - GND
+- RCWL 0516 OUT - D7
+
 ### Magnet
 Door/Window state sensor. Schematic available [here](https://github.com/mertenats/Open-Home-Automation/tree/master/ha_mqtt_binary_sensor_door).
 
@@ -68,13 +75,13 @@ To configure this sketch, you have to rename the header file `example.config.h` 
 #define DOOR_SENSOR                     D3
 
 // Motion sensor
-#define PIR_SENSOR                      D7
+#define MOTION_SENSOR                      D7
 
 // Photoresistor sensor
 #define LDR_SENSOR                      A0
 
 // Temperature and humidity sensor (DHT22)
-#define DHT22_SENSOR                  D2
+#define DHT_SENSOR                  D2
 
 // Button
 #define BUTTON_SENSOR                   D1

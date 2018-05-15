@@ -8,8 +8,8 @@
 #if defined(DOOR_SENSOR)
 #define DOOR_SENSOR_EVT               1
 #endif
-#if defined(PIR_SENSOR)
-#define PIR_SENSOR_EVT                2
+#if defined(MOTION_SENSOR)
+#define MOTION_SENSOR_EVT             2
 #endif
 #if defined(LDR_SENSOR)
 #define LDR_SENSOR_EVT                3
@@ -36,8 +36,8 @@ class MultiSensor {
 #if defined(DOOR_SENSOR)
     bool getDoorState(void);
 #endif
-#if defined(PIR_SENSOR)
-    bool getPirState(void);
+#if defined(MOTION_SENSOR)
+    bool getMotionState(void);
 #endif
 #if defined(LDR_SENSOR)
     uint16_t getLux(void);
@@ -60,8 +60,8 @@ class MultiSensor {
     bool _readDoorState(void);
     bool _doorState = false;
 #endif
-#if defined(PIR_SENSOR)
-    bool _pirState = false;
+#if defined(MOTION_SENSOR)
+    bool _motionState = false;
 #endif
 #if defined(LDR_SENSOR)
     uint16_t _ldrValue = 0;
