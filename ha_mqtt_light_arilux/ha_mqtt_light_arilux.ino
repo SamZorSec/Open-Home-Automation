@@ -1,4 +1,31 @@
-#include <ESP8266WiFi.h>
+/*
+  Configuration for Home Assistant :
+  
+  light:
+    - platform: mqtt
+      schema: json
+      state_topic: 'bedroom/arilux/state'
+      command_topic: 'bedroom/arilux/set'
+      brightness: true
+      rgb: true
+      white_value: true
+      effect: true
+      effect_list: 
+        - 'Static'
+        - 'Blink'
+        - 'Breath'
+        - 'Random Color'
+        - 'Rainbow'
+        - 'Fade'
+        - 'Strobe'
+        - 'Strobe Rainbow'
+        - 'Multi Strobe'
+        - 'Blink Rainbow'
+        - 'Comet'
+        - 'Fire Flicker'
+        - 'Halloween'
+ */
+ 
 #include <ArduinoOTA.h>
 #include <PubSubClient.h>   // https://github.com/knolleary/pubsubclient
 #include <ArduinoJson.h>    // https://github.com/bblanchon/ArduinoJson
@@ -106,6 +133,7 @@ void callback(char* p_topic, byte* p_payload, unsigned int p_length) {
       if ((red >= PWM_MIN || red <= PWM_MAX) && (green >= PWM_MIN || green <= PWM_MAX) && (blue >= PWM_MIN || blue <= PWM_MAX)) {
         rgbw.white = PWM_MIN;
         rgbw.isWhiteSelected = false;
+        ws2812fx.setMode(FX_MODE_STATIC);
         ws2812fx.setColor(red, green, blue);
         newStateToPublish = true;
       }
@@ -129,9 +157,50 @@ void callback(char* p_topic, byte* p_payload, unsigned int p_length) {
         rgbw.white = PWM_MAX;
         rgbw.brightness = white_value;
         rgbw.isWhiteSelected = true;
+        ws2812fx.setMode(FX_MODE_STATIC);
         ws2812fx.setColor(0, 0, 0); 
         newStateToPublish = true;
       }
+    }
+
+    // check if the payload contains a new effect value
+    if (root.containsKey("effect")) {
+      const char* effect = root["effect"];
+
+      // TODO check if current effect is different
+      rgbw.white = PWM_MIN;
+      rgbw.isWhiteSelected = false;
+      newStateToPublish = true;
+
+      if (strcmp_P(effect, (const char*)name_0) == 0) {
+        ws2812fx.setMode(FX_MODE_STATIC);
+      } else if (strcmp_P(effect, (const char*)name_1) == 0) {
+        ws2812fx.setMode(FX_MODE_BLINK);
+      } else if (strcmp_P(effect, (const char*)name_2) == 0) {
+        ws2812fx.setMode(FX_MODE_BREATH);
+      } else if (strcmp_P(effect, (const char*)name_8) == 0) {
+        ws2812fx.setMode(FX_MODE_RANDOM_COLOR);
+      } else if (strcmp_P(effect, (const char*)name_11) == 0) {
+        ws2812fx.setMode(FX_MODE_RAINBOW);
+      } else if (strcmp_P(effect, (const char*)name_15) == 0) {
+        ws2812fx.setMode(FX_MODE_FADE);
+      } else if (strcmp_P(effect, (const char*)name_26) == 0) {
+        ws2812fx.setMode(FX_MODE_STROBE);
+      } else if (strcmp_P(effect, (const char*)name_27) == 0) {
+        ws2812fx.setMode(FX_MODE_STROBE_RAINBOW);
+      } else if (strcmp_P(effect, (const char*)name_28) == 0) {
+        ws2812fx.setMode(FX_MODE_MULTI_STROBE);
+      } else if (strcmp_P(effect, (const char*)name_29) == 0) {
+        ws2812fx.setMode(FX_MODE_BLINK_RAINBOW);
+      } else if (strcmp_P(effect, (const char*)name_44) == 0) {
+        ws2812fx.setMode(FX_MODE_COMET);
+      } else if (strcmp_P(effect, (const char*)name_48) == 0) {
+        ws2812fx.setMode(FX_MODE_FIRE_FLICKER);
+      } else if (strcmp_P(effect, (const char*)name_52) == 0) {
+        ws2812fx.setMode(FX_MODE_HALLOWEEN);
+      } else {
+        ws2812fx.setMode(FX_MODE_BLINK);
+      }   
     }
   }
 }
@@ -146,6 +215,7 @@ void sendState(void) {
   color["g"] = rgbw.green;
   color["b"] = rgbw.blue;
   root["white_value"] = rgbw.white == 0 ? 0 : rgbw.brightness;
+  root["effect"] = ws2812fx.getModeName(ws2812fx.getMode());//"Static";
 
   char tmp[128] = {0};
   root.printTo(tmp);
@@ -153,9 +223,9 @@ void sendState(void) {
 }
 
 bool reconnect() {
-  if (mqttClient.connect(DEVICE_NAME, MQTT_USERNAME, MQTT_PASSWORD, MQTT_AVAILABILITY_TOPIC, 0, 1, "offline")) {
+  if (mqttClient.connect(DEVICE_NAME, MQTT_USERNAME, MQTT_PASSWORD, MQTT_AVAILABILITY_TOPIC, 0, 1, MQTT_NOT_AVAILABLE_PAYLOAD)) {
     mqttClient.subscribe(MQTT_CMD_TOPIC);
-    mqttClient.publish(MQTT_AVAILABILITY_TOPIC, "online");
+    mqttClient.publish(MQTT_AVAILABILITY_TOPIC, MQTT_AVAILABLE_PAYLOAD);
 
     sendState();
   }
