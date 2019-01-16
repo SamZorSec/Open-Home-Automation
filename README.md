@@ -53,6 +53,7 @@ Lights, sensors, switches and more can be built on top of MQTT. This section con
 | [Light](/ha_mqtt_rgb_light)                   | A simple example to control a **RGB led**                             |
 | [Light](/ha_mqtt_light_with_WiFiManager_mDNS_and_OTA) | A simple example to control a **RGB led** (with **OTA** and **mDNS**)|
 | [Light](https://github.com/mertenats/Arilux_AL-LC03)| An alternative firmware for the **Arilux AL-LC0X LED controller** |
+| [Light](/ha_mqtt_light_arilux)| An alternative firmware for the **Arilux AL-LC0X LED controller** with multiple effects from the [WS2812FX](https://github.com/kitesurfer1404/WS2812FX) |
 | [Light](/ha_mqtt_rgbw_ligh_with_discovery)    | A simple example to control a **RGBW led**, based on the **MQTT JSON Light** component (brightness, rgb, white, color temperature and effects) and including the **MQTT Discovery**                         |
 | [Light](https://github.com/mertenats/AI-Thinker_RGBW_Bulb)    | An alternative firmware for **AI-Thinker RGBW bulbs**, based on the **MQTT JSON Light** component and including the **MQTT Discovery**  functionality                       |
 | [Switch](/ha_mqtt_switch)                     | A simple example to control a **switch**    

@@ -1,6 +1,13 @@
 /*
+  MQTT Light for Home-Assistant - Arilux (ESP8266)
+   
+  Libraries :
+    - ESP8266 Core : https://github.com/esp8266/Arduino
+    - PubSubClient : https://github.com/knolleary/pubsubclient
+    - WS2812FX :     https://github.com/kitesurfer1404/WS2812FX
+    - ArduinoJson :  https://github.com/bblanchon/ArduinoJson
+
   Configuration for Home Assistant :
-  
   light:
     - platform: mqtt
       schema: json
@@ -24,7 +31,11 @@
         - 'Comet'
         - 'Fire Flicker'
         - 'Halloween'
- */
+
+   Samuel M. - v1.0 - 01.2019
+   If you like this example, please add a star! Thank you!
+   https://github.com/mertenats/open-home-automation
+*/
  
 #include <ArduinoOTA.h>
 #include <PubSubClient.h>   // https://github.com/knolleary/pubsubclient
@@ -242,23 +253,12 @@ void setupMQTT(void) {
 ///////////////////////////////////////////////////////////////////////////////////////////////
 
 void setupWiFi(void) {
-  Serial.print("Connecting to ");
-  Serial.println(WIFI_SSID);
-  
   WiFi.mode(WIFI_STA);
   WiFi.begin(WIFI_SSID, WIFI_PASSWORD);
   
   while (WiFi.status() != WL_CONNECTED) {
     delay(500);
-    Serial.print(".");
   }
-
-  randomSeed(micros());
-
-  Serial.println("");
-  Serial.println("WiFi connected");
-  Serial.println("IP address: ");
-  Serial.println(WiFi.localIP());
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////
@@ -266,9 +266,6 @@ void setupWiFi(void) {
 ///////////////////////////////////////////////////////////////////////////////////////////////
 
 void setup() {
-  Serial.begin(115200);
-  delay(10);
-
   setupWiFi();
 
   setupMQTT();
