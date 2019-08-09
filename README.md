@@ -1,5 +1,7 @@
 # Open Home Automation
 
+**THIS REPOSITORY IS NOT MAINTAINED ANYMORE, SEE [ESPHome](https://esphome.io/) AS ALTERNATIVE.**
+
 ## Introduction
 Nowadays everything becomes connected to the Internet and gives us a glimpse of many new possibilities. Home automation is part of it and offers many advantages for their users.
 This repository is dedicated to [Home Assistant](https://home-assistant.io), an open source project with an amazing community, ESP8266 and ESP32 modules, the MQTT protocol and much more [...].
