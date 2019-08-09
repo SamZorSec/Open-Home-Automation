@@ -1,6 +1,6 @@
 # Open Home Automation
 
-**THIS REPOSITORY IS NOT MAINTAINED ANYMORE, SEE [ESPHome](https://esphome.io/) AS ALTERNATIVE.**
+**THIS REPOSITORY IS NOT MAINTAINED ANYMORE, SEE [ESPHome](https://esphome.io/) AS AN ALTERNATIVE.**
 
 ## Introduction
 Nowadays everything becomes connected to the Internet and gives us a glimpse of many new possibilities. Home automation is part of it and offers many advantages for their users.
