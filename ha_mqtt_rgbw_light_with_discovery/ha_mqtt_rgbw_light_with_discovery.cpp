@@ -165,13 +165,13 @@ bool AIRGBWBulb::setColorTemperature(uint16_t p_colorTemperature) {
   // https://fr.wikipedia.org/wiki/Mired
   // http://www.tannerhelland.com/4435/convert-temperature-rgb-algorithm-code/
   // M = 1000000 / T <> T [kelvin] = 1000000 / M [mired]
-      int tmpKelvin = 1000000 / m_colorTemperature;
-  
-      if (tmpKelvin < 1000) {
-        tmpKelvin = 1000;
-      } else if (tmpKelvin > 40000) {
-        tmpKelvin = 40000;
-      }
+  int tmpKelvin = 1000000 / m_colorTemperature;
+
+  if (tmpKelvin < 1000) {
+    tmpKelvin = 1000;
+  } else if (tmpKelvin > 40000) {
+    tmpKelvin = 40000;
+  }
 
   //int tmpKelvin = map(p_colorTemperature, COLOR_TEMP_HA_MIN_IN_MIRED, COLOR_TEMP_HA_MAX_IN_MIRED, COLOR_TEMP_MAX_IN_KELVIN, COLOR_TEMP_MIN_IN_KELVIN);
   tmpKelvin = tmpKelvin / 100;
@@ -215,7 +215,7 @@ bool AIRGBWBulb::setColorTemperature(uint16_t p_colorTemperature) {
   }
 
   // computes blue
-  if (tmpKelvin <= 66) {
+  if (tmpKelvin >= 66) {
     m_color.blue = 255;
   } else {
     if (tmpKelvin <= 19) {
